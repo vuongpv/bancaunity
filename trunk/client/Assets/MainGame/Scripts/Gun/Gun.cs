@@ -51,8 +51,6 @@ public class Gun : _MyGameObject {
 
 	private void ReLoad()
 	{
-		Debug.Log ("======reload   "+mId);
-
 		LoadFrame (mId);
 		transform.transform.localScale = Vector3.one;
 		mAnimation=GetComponent<MyAnimation>();

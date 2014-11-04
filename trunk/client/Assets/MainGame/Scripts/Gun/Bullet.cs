@@ -24,19 +24,9 @@ public class Bullet : _MyGameObject {
 		transform.localScale = Vector3.one;
 		ChangeStatus ((int)BULLET_STATUS.MOVE);
 		transform.localScale = Vector3.one;
-//		mAnimation.loop = true;
-
-//		StartCoroutine (test ());
 	}
 
-//	IEnumerator test()
-//	{
-//		while(){
-//			yield return 0;
-//		}
-//		yield return new WaitForSeconds (0.1f);
-//		Debug.Log ("aaaaaaaaaa");
-//	}
+
 
 	public void LoadFrame(int id)
 	{
@@ -81,8 +71,7 @@ public class Bullet : _MyGameObject {
 	}
 
 	public void setDec(float xD, float yD) {
-//		float sin = (float) Mathf.Sin(Mathf.Deg2Rad*transform.rotation.z);
-//		float cos = (float) Mathf.Cos(Mathf.Deg2Rad*transform.rotation.z);
+
 
 		xDesc = xD;
 		yDesc = yD;
