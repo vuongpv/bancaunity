@@ -102,6 +102,7 @@ public class _MyGameObject : MonoBehaviour {
 //		SetPosition (GetX () + dx, GetY () + dy);
 		SetX (GetX() + dx);
 		SetY (GetY()+dy);
+
 	}
 	
 	public  bool MoveToX(int desX) {
