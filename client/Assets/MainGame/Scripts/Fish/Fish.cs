@@ -105,9 +105,9 @@ public class Fish : _MyGameObject {
 	}
 	public bool CheckLimit()
 	{
-		if (transform.localPosition.x < leftLimit-GetWidthSprite())
+		if (transform.localPosition.x < leftLimit-2*GetWidthSprite())
 			return false;
-		else if (transform.localPosition.x >= rightLimit + GetWidthSprite())
+		else if (transform.localPosition.x >= rightLimit + 2*GetWidthSprite())
 			return false;
 		if (transform.localPosition.y < bottomLimit)
 			return false;

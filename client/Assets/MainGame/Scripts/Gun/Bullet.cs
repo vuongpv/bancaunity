@@ -50,7 +50,6 @@ public class Bullet : _MyGameObject {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("=========== bullet update: ");
 		base.Update ();
 		switch (mStatus) {
 		case (int)BULLET_STATUS.MOVE:
