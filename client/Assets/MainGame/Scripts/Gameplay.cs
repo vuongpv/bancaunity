@@ -11,19 +11,12 @@ public class Gameplay : GameBoard {
 	private string[][] infor_fishLevel,infor_Fish;
 
 	void Start () {
-		infor_fishLevel= CSVReader.GetData (fishLevel.text);
-
-		LoadFish (level);
+//		infor_fishLevel= CSVReader.GetData (fishLevel.text);
+//
+//		LoadFish (level);
 	}
 
-	public void ReadFile(string fileName)
-	{
-		string line;
-		System.IO.StreamReader file = new System.IO.StreamReader(fileName);
-		while ((line = file.ReadLine()) != null) {
-			Debug.Log(line);
-		}
-	}
+
 
 	private void LoadFish(int level)
 	{
