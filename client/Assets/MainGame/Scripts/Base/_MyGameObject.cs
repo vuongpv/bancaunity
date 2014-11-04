@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class _MyGameObject : MonoBehaviour {
-	private	float speed=0.1f;
+	private	float speed=0.0f;
 	private float xTarget,yTarget;
 	private bool isTarget;
 	private int signSin, signCos;

@@ -6,12 +6,12 @@ public class Fish : _MyGameObject {
 	protected int mId;
 	protected int mStatus;
 	protected Camera mViewLimit;
-	private float leftLimit,rightLimit,topLimit,bottomLimit;
-	private float dx,dy;
-	private float curren_Angle = 0, next_Angle = 0, offsetAngle, detaAngle;
+	protected float leftLimit,rightLimit,topLimit,bottomLimit;
+	protected float dx,dy;
+	protected float curren_Angle = 0, next_Angle = 0, offsetAngle, detaAngle;
 	protected MyAnimation mAnimation;
 
-	private string[] fr_move,fr_die;
+	protected string[] fr_move,fr_die;
 
 
 
@@ -30,7 +30,7 @@ public class Fish : _MyGameObject {
 		name = "f_" + mId;
 	}
 
-	protected void LoadFrame()
+	protected virtual void LoadFrame()
 	{
 		fr_move = new string[]{"f2000"+mId+"_m_01","f2000"+mId+"_m_02","f2000"+mId+"_m_03","f2000"+mId+"_m_04","f2000"+mId+"_m_05","f2000"+mId+"_m_06","f2000"+mId+"_m_07","f2000"+mId+"_m_08"};
 		fr_die = new string[]{"f2000"+mId+"_d_01","f2000"+mId+"_d_01","f2000"+mId+"_d_01","f2000"+mId+"_d_02","f2000"+mId+"_d_02","f2000"+mId+"_d_02","f2000"+mId+"_d_03","f2000"+mId+"_d_03","f2000"+mId+"_d_03"};
@@ -116,7 +116,7 @@ public class Fish : _MyGameObject {
 		return true;
 	}
 
-	private void RandomPosition()
+	protected virtual void RandomPosition()
 	{
 		ChangeStatus ((int)FISH_STATUS.ST_NORMAL);
 		int r = Random.Range (0,10);
@@ -145,7 +145,7 @@ public class Fish : _MyGameObject {
 		gameObject.SetActive (true);
 	}
 
-	private void Setdx_dy(float angle)
+	protected void Setdx_dy(float angle)
 	{
 		float radi = Mathf.Deg2Rad * angle;
 		dx = Mathf.Cos (radi)*GetSpeed();
@@ -171,7 +171,7 @@ public class Fish : _MyGameObject {
 		Setdx_dy(curren_Angle);
 	}
 
-	private void SetNextAngle(float a) {
+	protected virtual void SetNextAngle(float a) {
 
 		next_Angle = a;
 		
