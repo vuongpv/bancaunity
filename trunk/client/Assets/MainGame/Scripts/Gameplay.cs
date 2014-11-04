@@ -20,39 +20,39 @@ public class Gameplay : MonoBehaviour {
 			
 		}
 		
-//		for (int i=0; i<3; i++) {
-//			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
-//			f.SetCamera( mView);
-//			f.transform.parent = transform.FindChild ("Fishs").transform;
-//			f.Init(2);
-//			
-//		}
-//		
-//		for (int i=0; i<3; i++) {
-//			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
-//			f.SetCamera( mView);
-//			f.transform.parent = transform.FindChild ("Fishs").transform;
-//			f.Init(3);
-//			
-//		}
-//		
-//		
-//		for (int i=0; i<3; i++) {
-//			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
-//			f.SetCamera( mView);
-//			f.transform.parent = transform.FindChild ("Fishs").transform;
-//			f.Init(5);
-//			
-//		}
-//		
-//		
-//		for (int i=0; i<3; i++) {
-//			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
-//			f.SetCamera( mView);
-//			f.transform.parent = transform.FindChild ("Fishs").transform;
-//			f.Init(8);
-//			
-//		}
+		for (int i=0; i<3; i++) {
+			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
+			f.SetCamera( mView);
+			f.transform.parent = transform.FindChild ("Fishs").transform;
+			f.Init(2);
+			
+		}
+		
+		for (int i=0; i<3; i++) {
+			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
+			f.SetCamera( mView);
+			f.transform.parent = transform.FindChild ("Fishs").transform;
+			f.Init(3);
+			
+		}
+		
+		
+		for (int i=0; i<3; i++) {
+			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
+			f.SetCamera( mView);
+			f.transform.parent = transform.FindChild ("Fishs").transform;
+			f.Init(5);
+			
+		}
+		
+		
+		for (int i=0; i<3; i++) {
+			Fish f = (Instantiate (Resources.Load ("Prefabs/Fish")) as GameObject).GetComponent<Fish>();
+			f.SetCamera( mView);
+			f.transform.parent = transform.FindChild ("Fishs").transform;
+			f.Init(8);
+			
+		}
 	
 	}
 	

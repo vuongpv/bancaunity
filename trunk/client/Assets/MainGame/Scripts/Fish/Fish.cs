@@ -9,7 +9,6 @@ public class Fish : _MyGameObject {
 	private float leftLimit,rightLimit,topLimit,bottomLimit;
 	private float dx,dy;
 	private float curren_Angle = 0, next_Angle = 0, offsetAngle, detaAngle;
-	protected int delayCurren;
 	protected MyAnimation mAnimation;
 
 	private string[] fr_move,fr_die;
@@ -26,7 +25,7 @@ public class Fish : _MyGameObject {
 		
 		RandomPosition ();
 
-		SetSpeed (0.01f);
+		SetSpeed (Random.Range(0.005f,0.01f));
 
 		name = "f_" + mId;
 	}
@@ -41,11 +40,6 @@ public class Fish : _MyGameObject {
 	{
 		mViewLimit = c;
 
-//		leftLimit = mViewLimit.ScreenToWorldPoint (new Vector2(0,0)).x;
-//		rightLimit = mViewLimit.ScreenToWorldPoint (new Vector2(Screen.width,0)).x;
-//		bottomLimit = mViewLimit.ScreenToWorldPoint (new Vector2(0,0)).y;
-//		topLimit = mViewLimit.ScreenToWorldPoint (new Vector2(0,Screen.height)).y;
-
 		leftLimit = -Screen.width / 2;
 		rightLimit = Screen.width / 2;
 		topLimit = Screen.height / 2;
@@ -54,12 +48,7 @@ public class Fish : _MyGameObject {
 
 	}
 
-//	public Fish(Camera c)
-//	{
-//		mViewLimit = c;
-//		Start ();
-//	
-//	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -68,10 +57,9 @@ public class Fish : _MyGameObject {
 		switch (mStatus) {
 		case (int)FISH_STATUS.ST_NORMAL:
 			if (curren_Angle != next_Angle) {
-				updateAngle();
+				UpdateAngle();
 			} else {
-
-				StartCoroutine (test ());
+				StartCoroutine (WaitingNextAngle ());
 			}
 
 
@@ -93,36 +81,6 @@ public class Fish : _MyGameObject {
 		}
 	}
 
-	protected void NewAngle() {
-		Debug.Log ("NewAngle");
-//		if (haveDes)
-//			return;
-		SetAngleObject(Random.Range(curren_Angle - 90,curren_Angle + 90));
-	}
-
-	protected void updateAngle() {
-		detaAngle -= Mathf.Abs(offsetAngle);
-		if (delayCurren < 0) {
-			if (offsetAngle > 0) {
-				offsetAngle += detaAngle;
-			} else {
-				offsetAngle -= detaAngle;
-				
-			}
-		}
-		curren_Angle += offsetAngle;
-		
-		if ((offsetAngle > 0 && curren_Angle > next_Angle) || (offsetAngle < 0 && curren_Angle < next_Angle))
-			curren_Angle = next_Angle;
-		
-		SetAngleObject( curren_Angle);
-		// if (angle >= -90 && angle < 90) {
-		// tranform = SpriteBatcher.TRANFORM_NONE;
-		// } else {
-		// tranform = SpriteBatcher.TRANFORM_90;
-		// }
-		SetSpeed(curren_Angle);
-	}
 
 
 	public void ChangeStatus(int newStatus)
@@ -147,23 +105,20 @@ public class Fish : _MyGameObject {
 	}
 	public bool CheckLimit()
 	{
-				if (transform.localPosition.x < leftLimit-GetWidthSprite())
-								return false;
-		else if (transform.localPosition.x >= rightLimit)
-								return false;
+		if (transform.localPosition.x < leftLimit-GetWidthSprite())
+			return false;
+		else if (transform.localPosition.x >= rightLimit + GetWidthSprite())
+			return false;
 		if (transform.localPosition.y < bottomLimit)
-								return false;
-						else if (transform.localPosition.y > topLimit)
-								return false;
+			return false;
+		else if (transform.localPosition.y > topLimit)
+			return false;
 		return true;
 	}
 
 	private void RandomPosition()
 	{
-
 		ChangeStatus ((int)FISH_STATUS.ST_NORMAL);
-
-//		Debug.Log ("================ RandomPosition");
 		int r = Random.Range (0,10);
 		float x, y,angle=0;
 		switch (r) {
@@ -177,13 +132,11 @@ public class Fish : _MyGameObject {
 			break;
 
 		default:
-			x=rightLimit;
+			x=rightLimit + GetWidthSprite()/2;
 			y=Random.Range(bottomLimit,topLimit-GetHeightSprite()+1);
 			angle=Random.Range(140,220);
 			break;
 		}
-
-//		SetPosition (x,y);
 
 		transform.localPosition=new Vector2(x,y);
 
@@ -194,39 +147,47 @@ public class Fish : _MyGameObject {
 
 	private void Setdx_dy(float angle)
 	{
-
 		float radi = Mathf.Deg2Rad * angle;
 		dx = Mathf.Cos (radi)*GetSpeed();
 		dy=Mathf.Sin(radi)*GetSpeed();
-
-//		Debug.Log ("dx== "+dx+", dy="+dy+", radi: "+ radi+",angle: "+angle);
 	}
 
-	IEnumerator test()
+	IEnumerator WaitingNextAngle()
 	{
 		yield return new WaitForSeconds (1f);
-		NewAngle ();
+		SetNextAngle (Random.Range(curren_Angle - 90, curren_Angle + 90));
 	}
 
- 	protected void UpdateAngle()
+ 	private void UpdateAngle()
 	{
-			detaAngle -= Mathf.Abs(offsetAngle);
-			if (delayCurren < 0) {
-				if (offsetAngle > 0) {
-					offsetAngle += detaAngle;
-				} else {
-					offsetAngle -= detaAngle;
-					
-				}
-			}
-			curren_Angle += offsetAngle;
-			
-			if ((offsetAngle > 0 && curren_Angle > next_Angle) || (offsetAngle < 0 && curren_Angle < next_Angle))
-				curren_Angle = next_Angle;
-			
-			SetAngleObject(curren_Angle);
+		detaAngle -= Mathf.Abs(offsetAngle);
 
-			Setdx_dy(curren_Angle);
+		curren_Angle += offsetAngle;
+		if ((offsetAngle > 0 && curren_Angle > next_Angle) || (offsetAngle < 0 && curren_Angle < next_Angle))
+			curren_Angle = next_Angle;
+			
+		SetAngleObject(curren_Angle);
+
+		Setdx_dy(curren_Angle);
+	}
+
+	private void SetNextAngle(float a) {
+
+		next_Angle = a;
+		
+		if (next_Angle > 360)
+			next_Angle -= 360;
+		
+		offsetAngle = 1;
+		
+		if (next_Angle > curren_Angle) {
+			detaAngle = next_Angle - curren_Angle;
+		} else if (next_Angle < curren_Angle) {
+			offsetAngle = -offsetAngle;
+			detaAngle = curren_Angle - next_Angle;
+		} else {
+			offsetAngle = 0;
+		}
 	}
 
 }
