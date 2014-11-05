@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Gameplay : GameBoard {
 	public	Camera mView;
-	private int level=2;
+	private int level=1;
 	public TextAsset fishLevel;
 	public TextAsset totalInfor;
 	
@@ -20,16 +20,20 @@ public class Gameplay : GameBoard {
 
 	private void LoadFish(int level)
 	{
+		Debug.Log ("Loadfish level:  "+level);
 		string[] data=infor_fishLevel[level];
-		for (int i=(int)INDEX_FISH_LEVEL.F1; i<data.Length; i++) {
-			if(data[i]==null)
-				continue;
+//		for (int i=(int)INDEX_FISH_LEVEL.F1; i<=(int)INDEX_FISH_LEVEL.F17; i++) {
+//			if(data[i]==null)
+//				continue;
+//
+//			for(int j=0;j<int.Parse(data[i]);j++)
+//			{
+//
+//				CreateFish(i-3);
+//			}
+//		}
 
-			for(int j=0;j<int.Parse(data[i]);j++)
-			{
-				CreateFish(i-3);
-			}
-		}
+		CreateFish(1);
 	}
 
 
@@ -58,6 +62,14 @@ public class Gameplay : GameBoard {
 			f.SetCamera( mView);
 			f.transform.parent =transform.FindChild("Object").transform.FindChild("Fishs").transform;
 			f.Init(id);
+			break;
+		case 1:
+		case 2:
+			f=(Instantiate (Resources.Load (Constant.pathPrefabs+"FishForum")) as GameObject).GetComponent<FishForum>();
+			f.SetCamera( mView);
+			f.transform.parent =transform.FindChild("Object").transform.FindChild("Fishs").transform;
+			f.Init(id);
+
 			break;
 		default:
 			f=(Instantiate (Resources.Load (Constant.pathPrefabs+"Fish")) as GameObject).GetComponent<Fish>();

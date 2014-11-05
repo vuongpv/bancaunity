@@ -101,11 +101,11 @@ public class Bullet : _MyGameObject {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log ("OnCollisionEnter");
+//		Debug.Log ("OnCollisionEnter");
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Debug.Log ("OnTriggerEnter: "+mStatus);
+//		Debug.Log ("OnTriggerEnter: "+mStatus);
 
 		if (mStatus != (int)BULLET_STATUS.ATDESC)
 			return;

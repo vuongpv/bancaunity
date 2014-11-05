@@ -13,27 +13,208 @@ public class Fish : _MyGameObject {
 
 	protected string[] fr_move,fr_die;
 
+	void Awake()
+	{
+		
+		SetSpeed (Random.Range(0.005f,0.01f));
+		mAnimation = GetComponent<MyAnimation> ();
 
+	}
 
-	public void Init(int id)
+	public virtual void Init(int id)
 	{
 		mId = id;
 		LoadFrame ();
 
-		mAnimation = GetComponent<MyAnimation> ();
+	
 		ChangeStatus ((int)FISH_STATUS.ST_NORMAL);
 		
 		RandomPosition ();
 
-		SetSpeed (Random.Range(0.005f,0.01f));
 
 		name = "f_" + mId;
+		switch (mId) {
+		case 7:
+			mAnimation.SetDelay(2);
+			SetSpeed(0.03f);
+			break;
+		case 6:
+		case 10:
+		case 14:
+			mAnimation.SetDelay(4);
+			SetSpeed(0.02f);
+			break;
+		case 11:
+		case 12:
+			mAnimation.SetDelay(5);
+			SetSpeed(0.01f);
+			break;
+		case 13:
+		case 15:
+		case 16:
+		case 17:
+			mAnimation.SetDelay(3);
+			SetSpeed(0.03f);
+			break;
+
+//		default:00
+//			mAnimation.SetDelay(1);
+//			SetSpeed(0.001f);
+//			break;
+		}
+
 	}
 
 	protected virtual void LoadFrame()
 	{
-		fr_move = new string[]{"f2000"+mId+"_m_01","f2000"+mId+"_m_02","f2000"+mId+"_m_03","f2000"+mId+"_m_04","f2000"+mId+"_m_05","f2000"+mId+"_m_06","f2000"+mId+"_m_07","f2000"+mId+"_m_08"};
-		fr_die = new string[]{"f2000"+mId+"_d_01","f2000"+mId+"_d_01","f2000"+mId+"_d_01","f2000"+mId+"_d_02","f2000"+mId+"_d_02","f2000"+mId+"_d_02","f2000"+mId+"_d_03","f2000"+mId+"_d_03","f2000"+mId+"_d_03"};
+		switch (mId) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 7:
+		case 8:
+		case 9:
+			fr_move = new string[] {
+				"f2000" + mId + "_m_01",
+				"f2000" + mId + "_m_02",
+				"f2000" + mId + "_m_03",
+				"f2000" + mId + "_m_04",
+				"f2000" + mId + "_m_05",
+				"f2000" + mId + "_m_06",
+				"f2000" + mId + "_m_07",
+				"f2000" + mId + "_m_08"
+			};
+			fr_die = new string[] {
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_03",
+				"f2000" + mId + "_d_03",
+				"f2000" + mId + "_d_03"
+			};		
+			break;
+		
+		case 6:
+			fr_move = new string[]{
+				"f2000"+mId+"_m_01",
+				"f2000"+mId+"_m_02",
+				"f2000"+mId+"_m_03",
+				"f2000"+mId+"_m_04",
+				"f2000"+mId+"_m_05",
+				"f2000"+mId+"_m_06",
+				"f2000"+mId+"_m_06",
+				"f2000"+mId+"_m_06",
+				"f2000"+mId+"_m_07",
+				"f2000"+mId+"_m_07",
+				"f2000"+mId+"_m_07",
+				"f2000"+mId+"_m_08",
+				"f2000"+mId+"_m_08",
+				"f2000"+mId+"_m_08"
+			};
+			fr_die = new string[]{
+				"f2000"+mId+"_d_01",
+				"f2000"+mId+"_d_01",
+				"f2000"+mId+"_d_01",
+				"f2000"+mId+"_d_02",
+				"f2000"+mId+"_d_02",
+				"f2000"+mId+"_d_02",
+				"f2000"+mId+"_d_03",
+				"f2000"+mId+"_d_03",
+				"f2000"+mId+"_d_03"};
+			break;
+		case 10:
+			fr_move = new string[]{
+				"f200"+mId+"_m_01",
+				"f200"+mId+"_m_02",
+				"f200"+mId+"_m_03",
+				"f200"+mId+"_m_04",
+				"f200"+mId+"_m_05",
+				"f200"+mId+"_m_06",
+				"f200"+mId+"_m_06",
+				"f200"+mId+"_m_06",
+				"f200"+mId+"_m_07",
+				"f200"+mId+"_m_07",
+				"f200"+mId+"_m_07",
+				"f200"+mId+"_m_08",
+				"f200"+mId+"_m_08",
+				"f200"+mId+"_m_08"
+			};
+			fr_die = new string[]{
+				"f200"+mId+"_d_01",
+				"f200"+mId+"_d_01",
+				"f200"+mId+"_d_01",
+				"f200"+mId+"_d_02",
+				"f200"+mId+"_d_02",
+				"f200"+mId+"_d_02",
+				"f200"+mId+"_d_03",
+				"f200"+mId+"_d_03",
+				"f200"+mId+"_d_03"};
+			break;
+
+		case 11:
+		case 12:
+			fr_move = new string[] {
+				"f200" + mId + "_m_01",
+				"f200" + mId + "_m_02",
+				"f200" + mId + "_m_02",
+				"f200" + mId + "_m_03",
+				"f200" + mId + "_m_03",
+				"f200" + mId + "_m_03",
+				"f200" + mId + "_m_04",
+				"f200" + mId + "_m_05",
+				"f200" + mId + "_m_06",
+				"f200" + mId + "_m_07",
+
+				"f200" + mId + "_m_08"
+			};
+			fr_die = new string[] {
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_03",
+				"f200" + mId + "_d_03",
+				"f200" + mId + "_d_03"
+			};		
+			break;
+		
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+			fr_move = new string[] {
+				"f200" + mId + "_m_01",
+				"f200" + mId + "_m_02",
+				"f200" + mId + "_m_03",
+				"f200" + mId + "_m_04",
+				"f200" + mId + "_m_05",
+				"f200" + mId + "_m_06",
+				"f200" + mId + "_m_07",
+				"f200" + mId + "_m_08"
+			};
+			fr_die = new string[] {
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_01",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_02",
+				"f200" + mId + "_d_03",
+				"f200" + mId + "_d_03",
+				"f200" + mId + "_d_03"
+			};		
+			break;
+		}
+
+
 	}
 
 	public void SetCamera(Camera c)
@@ -51,9 +232,10 @@ public class Fish : _MyGameObject {
 
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
+		if (!mAnimation.IsUpdate ())
+			return;
 		base.Update ();	
-
 		switch (mStatus) {
 		case (int)FISH_STATUS.ST_NORMAL:
 			if (curren_Angle != next_Angle) {
@@ -89,10 +271,29 @@ public class Fish : _MyGameObject {
 		switch (mStatus) {
 		case (int) FISH_STATUS.ST_NORMAL:
 			mAnimation.SetFrame(fr_move);
-
+			switch (mId) {
+			case 7:
+				mAnimation.SetDelay(2);
+				break;
+			case 6:
+			case 10:
+				mAnimation.SetDelay(4);
+				break;
+			case 11:
+			case 12:
+				mAnimation.SetDelay(5);
+				break;
+			case 13:
+			case 14:
+			case 15:
+			case 16:
+			case 17:
+				mAnimation.SetDelay(3);
+				break;
+			}
 			break;
 		case (int)FISH_STATUS.ST_DIE:
-
+			mAnimation.SetDelay(1);
 			mAnimation.SetFrame(fr_die);
 
 			break;
@@ -103,8 +304,9 @@ public class Fish : _MyGameObject {
 	{
 		return mStatus;
 	}
-	public bool CheckLimit()
+	public virtual bool CheckLimit()
 	{
+	
 		if (transform.localPosition.x < leftLimit-2*GetWidthSprite())
 			return false;
 		else if (transform.localPosition.x >= rightLimit + 2*GetWidthSprite())
@@ -145,7 +347,7 @@ public class Fish : _MyGameObject {
 		gameObject.SetActive (true);
 	}
 
-	protected void Setdx_dy(float angle)
+ protected virtual void Setdx_dy(float angle)
 	{
 		float radi = Mathf.Deg2Rad * angle;
 		dx = Mathf.Cos (radi)*GetSpeed();
@@ -171,7 +373,7 @@ public class Fish : _MyGameObject {
 		Setdx_dy(curren_Angle);
 	}
 
-	protected virtual void SetNextAngle(float a) {
+	public virtual void SetNextAngle(float a) {
 
 		next_Angle = a;
 		

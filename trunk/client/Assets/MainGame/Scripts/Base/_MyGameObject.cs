@@ -103,6 +103,7 @@ public class _MyGameObject : MonoBehaviour {
 		SetX (GetX() + dx);
 		SetY (GetY()+dy);
 
+
 	}
 	
 	public  bool MoveToX(int desX) {

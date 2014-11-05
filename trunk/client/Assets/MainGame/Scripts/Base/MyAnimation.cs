@@ -8,38 +8,45 @@ public class MyAnimation : UISpriteAnimation {
 
 
 	protected bool endFrame=false;
+	protected float timeDelay=1;
+	private bool isUpdate=false;
 
 	void Awake()
 	{
 		RebuildSpriteList ();
 	}
 
+
+
 	protected override void  Start()
 	{
-//		RebuildSpriteList ();
 	}
 	/// <summary>
 	/// Advance the sprite animation process.
 	/// </summary>
-	
+
+	public void SetDelay(float delay)
+	{
+		timeDelay = delay;
+	}
 	protected override void Update ()
 	{
 		if (mIndex == 0)
-						endFrame = false;
+			endFrame = false;
 		if (mActive && mSpriteNames.Count > 1 && Application.isPlaying && mFPS > 0)
 		{
+			if(isUpdate)
+				isUpdate=false;
 			mDelta += RealTime.deltaTime;
-			float rate = 1f / mFPS;
+			float rate = timeDelay / mFPS;
 			
 			if (rate < mDelta)
 			{
-				
+				isUpdate=true;
 				mDelta = (rate > 0f) ? mDelta - rate : 0f;
-				
-				if (++mIndex >= mSpriteNames.Count)
+				++mIndex;
+				if (mIndex >= mSpriteNames.Count)
 				{
-
-
 					endFrame=true;
 
 					mIndex = 0;
@@ -56,6 +63,11 @@ public class MyAnimation : UISpriteAnimation {
 		}
 	}
 
+
+	public bool IsUpdate()
+	{
+		return isUpdate;
+	}
 
 	public void SetFrame(string[] names)
 	{
