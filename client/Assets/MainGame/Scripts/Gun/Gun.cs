@@ -123,9 +123,22 @@ public class Gun : _MyGameObject {
 		ChangeStatus ((int)GUN_STATUS.ST_SHOT);
 		float deg=(((float) Mathf.Atan2(target.x - (GetX() ), (GetY() ) - target.y)) * Mathf.Rad2Deg) + 180f;
 
+		float  yTarget=target.y;
+
+		if (deg >= 80 && target.x<0) {
+			deg = 80;
+			yTarget = GetY () - (target.x - GetX ()) / Mathf.Tan (Mathf.Deg2Rad * deg);
+		} 
+		else
+		if (deg <= 280 && target.x>0) {
+			deg=280;
+			yTarget=GetY() -(target.x - GetX())/Mathf.Tan(Mathf.Deg2Rad*deg);
+		}
+
+
 		SetAngleObject (deg);
 
-		CreateBullet (deg,target.x,target.y);
+		CreateBullet (deg,target.x,yTarget);
 
 	 }
 
