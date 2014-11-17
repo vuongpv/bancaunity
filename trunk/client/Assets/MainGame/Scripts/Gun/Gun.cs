@@ -129,32 +129,37 @@ public class Gun : _MyGameObject
 				return mId;
 		}
 
+	public bool ChangeGun(TapGesture gesture)
+	{
+		Vector3 target = Util_Funtion.convertPositionToCamera (gesture.Position, mView);
+		
+		if (mBox.bounds.Contains (target))
+			return true;
+		
+		if (leftBox.bounds.Contains (target)) {
+			if (mId > 1)
+				mId -= 1;
+			else
+				mId = 12;
+			ReLoad ();
+			return true;
+		} else
+		if (rightBox.bounds.Contains (target)) {
+			if (mId < MAX_GUN - 1)
+				mId += 1;
+			else
+				mId = 1;
+			ReLoad ();
+			return true;
+		}
+
+		return false;
+	}
+
 		public void GunAction (TapGesture gesture)
 		{
 				Vector3 target = Util_Funtion.convertPositionToCamera (gesture.Position, mView);
 		
-				if (mBox.bounds.Contains (target))
-						return;
-		
-				if (leftBox.bounds.Contains (target)) {
-						if (mId > 1)
-								mId -= 1;
-						else
-								mId = 12;
-						ReLoad ();
-						return;
-				} else
-		if (rightBox.bounds.Contains (target)) {
-						if (mId < MAX_GUN - 1)
-								mId += 1;
-						else
-								mId = 1;
-						ReLoad ();
-						return;
-				}
-		
-		
-				
 				Gameplay.UpdateGold (-mId);
 		
 				ChangeStatus ((int)GUN_STATUS.ST_SHOT);

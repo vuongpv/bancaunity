@@ -116,15 +116,10 @@ public class Gameplay : GameBoard
 								Gameplay.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "No Money", "Close", ClickButton);
 								return;
 						} else {
-								gun.GunAction (gesture);
+				if(!gun.ChangeGun(gesture))
+					gun.GunAction (gesture);
 
 						}
-				} else {
-//						if (shopDialog != null) {
-//								if (shopDialog.gameObject.activeSelf) {
-//										CloseShop ();
-//								}
-//						}else if(sett)
 				}
 		}
 

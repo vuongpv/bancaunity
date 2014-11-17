@@ -80,64 +80,64 @@ public class Fish : _MyGameObject
 		protected virtual void LoadFrame ()
 		{
 				switch (mId) {
-				case 1:
-				case 2:
-				case 3:
-				case 4:
-				case 5:
-				case 8:
-				case 9:
-						fr_move = new string[] {
-				"f2000" + mId + "_m_01",
-				"f2000" + mId + "_m_02",
-				"f2000" + mId + "_m_03",
-				"f2000" + mId + "_m_04",
-				"f2000" + mId + "_m_05",
-				"f2000" + mId + "_m_06",
-				"f2000" + mId + "_m_07",
-				"f2000" + mId + "_m_08"
-			};
-						fr_die = new string[] {
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_03",
-				"f2000" + mId + "_d_03",
-				"f2000" + mId + "_d_03"
-			};		
-						break;
+//				case 1:
+//				case 2:
+//				case 3:
+//				case 4:
+//				case 5:
+//				case 8:
+//				case 9:
+//						fr_move = new string[] {
+//				"f2000" + mId + "_m_01",
+//				"f2000" + mId + "_m_02",
+//				"f2000" + mId + "_m_03",
+//				"f2000" + mId + "_m_04",
+//				"f2000" + mId + "_m_05",
+//				"f2000" + mId + "_m_06",
+//				"f2000" + mId + "_m_07",
+//				"f2000" + mId + "_m_08"
+//			};
+//						fr_die = new string[] {
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_03",
+//				"f2000" + mId + "_d_03",
+//				"f2000" + mId + "_d_03"
+//			};		
+//						break;
 		
-				case 6:
-						fr_move = new string[]{
-				"f2000" + mId + "_m_01",
-				"f2000" + mId + "_m_02",
-				"f2000" + mId + "_m_03",
-				"f2000" + mId + "_m_04",
-				"f2000" + mId + "_m_05",
-				"f2000" + mId + "_m_06",
-				"f2000" + mId + "_m_06",
-				"f2000" + mId + "_m_06",
-				"f2000" + mId + "_m_07",
-				"f2000" + mId + "_m_07",
-				"f2000" + mId + "_m_07",
-				"f2000" + mId + "_m_08",
-				"f2000" + mId + "_m_08",
-				"f2000" + mId + "_m_08"
-			};
-						fr_die = new string[]{
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_01",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_02",
-				"f2000" + mId + "_d_03",
-				"f2000" + mId + "_d_03",
-				"f2000" + mId + "_d_03"};
-						break;
+//				case 6:
+//						fr_move = new string[]{
+//				"f2000" + mId + "_m_01",
+//				"f2000" + mId + "_m_02",
+//				"f2000" + mId + "_m_03",
+//				"f2000" + mId + "_m_04",
+//				"f2000" + mId + "_m_05",
+//				"f2000" + mId + "_m_06",
+//				"f2000" + mId + "_m_06",
+//				"f2000" + mId + "_m_06",
+//				"f2000" + mId + "_m_07",
+//				"f2000" + mId + "_m_07",
+//				"f2000" + mId + "_m_07",
+//				"f2000" + mId + "_m_08",
+//				"f2000" + mId + "_m_08",
+//				"f2000" + mId + "_m_08"
+//			};
+//						fr_die = new string[]{
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_01",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_02",
+//				"f2000" + mId + "_d_03",
+//				"f2000" + mId + "_d_03",
+//				"f2000" + mId + "_d_03"};
+//						break;
 				case 7:
 						fr_move = new string[] {
 								"f2000" + mId + "_m_01",
@@ -160,6 +160,29 @@ public class Fish : _MyGameObject
 						};
 				
 						break;
+		default:
+			fr_move = new string[] {
+				"f2000" + mId + "_m_01",
+				"f2000" + mId + "_m_02",
+				"f2000" + mId + "_m_03",
+				"f2000" + mId + "_m_04",
+				"f2000" + mId + "_m_05",
+				"f2000" + mId + "_m_06",
+				"f2000" + mId + "_m_07",
+				"f2000" + mId + "_m_08"
+			};
+			fr_die = new string[] {
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_01",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_02",
+				"f2000" + mId + "_d_03",
+				"f2000" + mId + "_d_03",
+				"f2000" + mId + "_d_03"
+			};		
+			break;
 				case 10:
 						fr_move = new string[]{
 				"f200" + mId + "_m_01",
@@ -168,13 +191,9 @@ public class Fish : _MyGameObject
 				"f200" + mId + "_m_04",
 				"f200" + mId + "_m_05",
 				"f200" + mId + "_m_06",
-				"f200" + mId + "_m_06",
-				"f200" + mId + "_m_06",
+
 				"f200" + mId + "_m_07",
-				"f200" + mId + "_m_07",
-				"f200" + mId + "_m_07",
-				"f200" + mId + "_m_08",
-				"f200" + mId + "_m_08",
+
 				"f200" + mId + "_m_08"
 			};
 						fr_die = new string[]{
@@ -202,7 +221,6 @@ public class Fish : _MyGameObject
 				"f200" + mId + "_m_05",
 				"f200" + mId + "_m_06",
 				"f200" + mId + "_m_07",
-
 				"f200" + mId + "_m_08"
 			};
 						fr_die = new string[] {
@@ -326,7 +344,7 @@ public class Fish : _MyGameObject
 //						}
 						break;
 				case (int)FISH_STATUS.ST_DIE:
-						mAnimation.SetDelay (1);
+//						mAnimation.SetDelay (1);
 						mAnimation.SetFrame (fr_die);
 
 						break;
