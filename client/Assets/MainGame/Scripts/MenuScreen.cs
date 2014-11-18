@@ -10,7 +10,7 @@ public class MenuScreen : GameBoard
 			if (nameObject.Equals ("Offline")) {
 				Application.LoadLevel ("GamePlay");
 			} else if (nameObject.Equals ("Online")) {
-				ShowDialog(Constant.pathPrefabs + "Dialog/","Warning","Not support","Close",OnClickDialog);
+				ShowDialog(Constant.pathPrefabs + "Dialog/","Warning","The function is not open. Come back latter.","Close",OnClickDialog);
 			}
 		}
 

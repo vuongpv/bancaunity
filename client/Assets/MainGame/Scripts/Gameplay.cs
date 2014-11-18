@@ -14,9 +14,15 @@ public class Gameplay : GameBoard
 		private string[][] infor_fishLevel, infor_Fish;
 		public ShopDialog shopDialog;
 		public SettingDialog settingDialog;
+	private bool isGift=false;
+	float timeGift=0;
+	Texture2D textureBlank ;
+	public GameObject ButtonGift;
+
 
 		public Gun gun;
-		private bool isTap = true;
+		private bool isTap = true,isCapture=false;
+	private int countCapture;
 
 		void Start ()
 		{
@@ -27,7 +33,21 @@ public class Gameplay : GameBoard
 				controlGold = GameObject.Find ("BgMoney");
 				numberGold = (controlGold.transform.FindChild ("NumberMoney")).GetComponent<UILabel> ();
 				numberGold.text = Gameplay.golds + "";
+		textureBlank = new Texture2D (Screen.width,Screen.height);
 		}
+
+	void Update()
+	{
+		if (!isGift) {
+
+						timeGift += Time.deltaTime;
+						if (timeGift >= 20) {
+								isGift = true;
+				timeGift=0;
+								ButtonGift.gameObject.SetActive (true);
+						}
+				}
+	}
 
 		public static void UpdateGold (float gold)
 		{
@@ -105,6 +125,18 @@ public class Gameplay : GameBoard
 				return f;
 		}
 
+	void OnGUI(){
+		if (!isCapture)
+						return;
+		countCapture++;
+		if (countCapture >= 5) {
+			isCapture=false;
+			countCapture=0;
+		}
+
+		GUI.DrawTexture (new Rect(0,0,Screen.width,Screen.height),textureBlank);
+	}
+
 		void OnTap (TapGesture gesture)
 		{
 				if (!isTap) {
@@ -113,7 +145,7 @@ public class Gameplay : GameBoard
 				}
 				if (!isShowDialog) {
 						if (golds < gun.GetID ()) {
-								Gameplay.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "No Money", "Close", ClickButton);
+				Gameplay.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "You don't have enough money, you need to recharge.", "Close", ClickButton);
 								return;
 						} else {
 				if(!gun.ChangeGun(gesture))
@@ -136,6 +168,7 @@ public class Gameplay : GameBoard
 		public void OnCaptureClick ()
 		{
 				isTap = false;
+		isCapture = true;
 				Debug.Log ("OnCaptureClick");
 				Application.CaptureScreenshot (System.DateTime.Now + ".png");
 
@@ -174,6 +207,19 @@ public class Gameplay : GameBoard
 				shopDialog.gameObject.SetActive (true);
 			
 		}
+
+	public void OnClickGift()
+	{
+		isTap = false;
+		UpdateGold (50);
+		isGift = false;
+		ButtonGift.gameObject.SetActive (false);
+	}
+
+	public void OnClickItem()
+	{
+		ShowDialog(Constant.pathPrefabs + "Dialog/","Warning","The function is not open. Come back latter.","Close",ClickButton);
+	}
 
 		public void OnClickButton ()
 		{
