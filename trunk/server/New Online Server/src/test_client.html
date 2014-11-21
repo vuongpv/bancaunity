@@ -1,0 +1,22 @@
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script
+	src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+<script>
+var io1 = io.connect('http://192.168.10.132:7076/gameserver');
+
+// Emit ready event with room name.
+io1.emit('message', {"type":10002});
+
+// Listen for the announce event.
+var seq = 0;
+io1.on('10002', function(data) {
+	
+   	console.debug(seq + "-" + data.data);
+   	if(seq != data.data-1)
+   	{
+   		console.error("ERRRRR: MISSING" + seq );
+   	}
+   	seq = data.data;
+})
+
+</script>
