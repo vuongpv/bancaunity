@@ -14,15 +14,14 @@ public class Gameplay : GameBoard
 		private string[][] infor_fishLevel, infor_Fish;
 		public ShopDialog shopDialog;
 		public SettingDialog settingDialog;
-	private bool isGift=false;
-	float timeGift=0;
-	Texture2D textureBlank ;
-	public GameObject ButtonGift;
-
-
+		private bool isGift = false;
+		float countTimeGift = 0;
+		Texture2D textureBlank ;
+		public GameObject ButtonGift;
 		public Gun gun;
-		private bool isTap = true,isCapture=false;
-	private int countCapture;
+		private bool isTap = true, isCapture = false;
+		private int countCapture;
+		private readonly int timeGift = 20;
 
 		void Start ()
 		{
@@ -33,21 +32,21 @@ public class Gameplay : GameBoard
 				controlGold = GameObject.Find ("BgMoney");
 				numberGold = (controlGold.transform.FindChild ("NumberMoney")).GetComponent<UILabel> ();
 				numberGold.text = Gameplay.golds + "";
-		textureBlank = new Texture2D (Screen.width,Screen.height);
+				textureBlank = new Texture2D (Screen.width, Screen.height);
 		}
 
-	void Update()
-	{
-		if (!isGift) {
+		void Update ()
+		{
+				if (!isGift) {
 
-						timeGift += Time.deltaTime;
-						if (timeGift >= 20) {
+						countTimeGift += Time.deltaTime;
+						if (countTimeGift >= timeGift) {
 								isGift = true;
-				timeGift=0;
+								countTimeGift = 0;
 								ButtonGift.gameObject.SetActive (true);
 						}
 				}
-	}
+		}
 
 		public static void UpdateGold (float gold)
 		{
@@ -125,17 +124,18 @@ public class Gameplay : GameBoard
 				return f;
 		}
 
-	void OnGUI(){
-		if (!isCapture)
+		void OnGUI ()
+		{
+				if (!isCapture)
 						return;
-		countCapture++;
-		if (countCapture >= 5) {
-			isCapture=false;
-			countCapture=0;
-		}
+				countCapture++;
+				if (countCapture >= 5) {
+						isCapture = false;
+						countCapture = 0;
+				}
 
-		GUI.DrawTexture (new Rect(0,0,Screen.width,Screen.height),textureBlank);
-	}
+				GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), textureBlank);
+		}
 
 		void OnTap (TapGesture gesture)
 		{
@@ -145,11 +145,11 @@ public class Gameplay : GameBoard
 				}
 				if (!isShowDialog) {
 						if (golds < gun.GetID ()) {
-				Gameplay.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "You don't have enough money, you need to recharge.", "Close", ClickButton);
+								Gameplay.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "You don't have enough money, you need to recharge.", "Close", ClickButton);
 								return;
 						} else {
-				if(!gun.ChangeGun(gesture))
-					gun.GunAction (gesture);
+								if (!gun.ChangeGun (gesture))
+										gun.GunAction (gesture);
 
 						}
 				}
@@ -168,7 +168,7 @@ public class Gameplay : GameBoard
 		public void OnCaptureClick ()
 		{
 				isTap = false;
-		isCapture = true;
+				isCapture = true;
 				Debug.Log ("OnCaptureClick");
 				Application.CaptureScreenshot (System.DateTime.Now + ".png");
 
@@ -208,18 +208,18 @@ public class Gameplay : GameBoard
 			
 		}
 
-	public void OnClickGift()
-	{
-		isTap = false;
-		UpdateGold (50);
-		isGift = false;
-		ButtonGift.gameObject.SetActive (false);
-	}
+		public void OnClickGift ()
+		{
+				isTap = false;
+				UpdateGold (50);
+				isGift = false;
+				ButtonGift.gameObject.SetActive (false);
+		}
 
-	public void OnClickItem()
-	{
-		ShowDialog(Constant.pathPrefabs + "Dialog/","Warning","The function is not open. Come back latter.","Close",ClickButton);
-	}
+		public void OnClickItem ()
+		{
+				ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "The function is not open. Come back latter.", "Close", ClickButton);
+		}
 
 		public void OnClickButton ()
 		{
@@ -229,26 +229,33 @@ public class Gameplay : GameBoard
 						return;	
 
 				float g = 0;
-		
-				if (nameObject.Equals ("ButtonBuy1")) {
+
+				switch (nameObject) {
+				case "ButtonBuy1":
 						g = 200;
 						CloseShop ();
-				} else if (nameObject.Equals ("ButtonBuy2")) {
-						g = 500;
+						break;
+				case "ButtonBuy2":
+						g = 400;
 						CloseShop ();
-				} else if (nameObject.Equals ("ButtonBuy3")) {
+						break;
+				case "ButtonBuy3":
 						g = 600;
 						CloseShop ();
-				} else if (nameObject.Equals ("ButtonMenu")) {
+						break;
+				case "ButtonMenu":
 						CloseSetting ();
-
-				} else if (nameObject.Equals ("ButtonTutorial")) {
+						Application.LoadLevel ("MenuScreen");
+						break;
+				case "ButtonTutorial":
 						CloseSetting ();
-				} else if (nameObject.Equals ("ButtonClode")) {
+						break;
+				case "ButtonClode":
 						CloseSetting ();
 						CloseShop ();
+						break;
 				}
-		
+
 				UpdateGold (g);
 		}
 	
