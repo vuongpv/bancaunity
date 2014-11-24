@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 5797039ac908d45e4bc4c6718bf18c2a
+labels:
+- CG
+- Mobile
+- Shader
+- dissolve
+- unlit
+ShaderImporter:
+  defaultTextures: []
+  userData: 

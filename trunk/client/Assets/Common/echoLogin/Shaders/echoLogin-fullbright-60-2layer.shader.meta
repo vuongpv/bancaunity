@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 9fba48f19aebb4ab8a5276e90e0ff6b0
+labels:
+- CG
+- Mobile
+- Shader
+- layer
+- two
+- unlit
+ShaderImporter:
+  defaultTextures: []
+  userData: 

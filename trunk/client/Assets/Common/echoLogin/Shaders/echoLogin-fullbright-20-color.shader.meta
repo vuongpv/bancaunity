@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: ab2b24c076a904ddeb86c14e622ec2ad
+labels:
+- CG
+- Mobile
+- Shader
+- fullbright
+- unlit
+ShaderImporter:
+  defaultTextures: []
+  userData: 

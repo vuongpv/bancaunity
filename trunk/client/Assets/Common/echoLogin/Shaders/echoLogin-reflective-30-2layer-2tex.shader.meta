@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 41e133002ecab41dea990773ace679ca
+labels:
+- CG
+- Mobile
+- Shader
+- layer
+- reflective
+- texture
+ShaderImporter:
+  defaultTextures: []
+  userData: 

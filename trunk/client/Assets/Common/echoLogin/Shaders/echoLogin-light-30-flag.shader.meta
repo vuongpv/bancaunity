@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 508d6cedb7d8a471e8446b7fec57bfb2
+labels:
+- CG
+- Mobile
+- Shader
+- flag
+- light
+ShaderImporter:
+  defaultTextures: []
+  userData: 
