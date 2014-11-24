@@ -18,23 +18,19 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		private bool isGift = false;
 		float countTimeGift = 0;
 		Texture2D textureBlank ;
-		public GameObject ButtonGift;
 		public Gun gun;
 		private bool isTap = true, isCapture = false;
 		private int countCapture;
+		public GameObject ButtonGift;
 		private readonly int timeGift = 20;
-		private bool isShowDialog = false;
-
+		private readonly int GIFTGOLD = 50;
 		public bool canStart = false;
-	
 		List<ConfigSeasonRecord> listSeason;
 		List<int> listNormalSeasonID, listSpecialSeasonID;
-	
 		private FHFishSeason currentSeason;
-	
 		private int currentSeasonID;
-	
 		private string seasonOnlineName = "";
+
 		public string SeasonOnlineName {
 				get { return seasonOnlineName; }
 				set { seasonOnlineName = value; }
@@ -48,6 +44,11 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 
 				infor_fishLevel = CSVReader.GetData (fishLevel.text);
 				infor_Fish = CSVReader.GetData (fishInfor.text);
+
+
+				//set Onclik
+				shopDialog.SetCallBack (OnClickButton);
+				settingDialog.SetCallBack (OnClickButton);
 		
 				//				LoadFish (level);
 				controlGold = GameObject.Find ("BgMoney");
@@ -92,7 +93,6 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 	
 		IEnumerator CheckStartSeason ()
 		{
-//				Debug.LogWarning ("=================FHFishSeasonManager: CheckStartSeason");
 				while (!canStart) {
 						yield return new WaitForSeconds (0.1f);
 				}
@@ -102,7 +102,6 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 	
 		public void SetSeasonStart ()
 		{
-//				Debug.LogWarning ("=================FHFishSeasonManager: SetSeasonStart");
 				currentSeasonID = -1;
 				currentSeason = null;
 		
@@ -122,6 +121,21 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 						SetSeason (listSeason [currentSeasonID].name);
 				} else
 						currentSeason.OnSeasonUpdate ();
+
+				UpdateGift ();
+		}
+
+		private void UpdateGift ()
+		{
+				if (!isGift) {
+			
+						countTimeGift += Time.deltaTime;
+						if (countTimeGift >= timeGift) {
+								isGift = true;
+								countTimeGift = 0;
+								ButtonGift.gameObject.SetActive (true);
+						}
+				}
 		}
 	
 		void SetSeason (string name)
@@ -175,8 +189,6 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 						return listSeasonID [FHSystem.instance.randomGenerator.Next (listSeasonID.Count)];
 		}
 	
-		
-	
 		bool IsSpecialSeason (int seasonID)
 		{
 				return (seasonID > 100);
@@ -201,7 +213,7 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 						isTap = true;
 						return;
 				}
-				if (!isShowDialog) {
+				if (!GameBoard.isShowDialog) {
 						if (golds < gun.GetID ()) {
 								GameBoard.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "You don't have enough money, you need to recharge.", "Close", ClickButton);
 								return;
@@ -217,9 +229,9 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		{
 				isTap = false;
 				Debug.Log ("OnSettingClick");
-				isShowDialog = true;
-				settingDialog.Show (OnClickButton);
-				settingDialog.gameObject.SetActive (true);
+				GameBoard.isShowDialog = true;
+				GameBoard.ShowDialog (settingDialog);
+//				settingDialog.gameObject.SetActive (true);
 		
 		}
 	
@@ -236,16 +248,14 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		{
 				isTap = false;
 				Debug.LogError ("Close shop");
-				shopDialog.gameObject.SetActive (false);
-				isShowDialog = false;
+				GameBoard.CloseDialog (shopDialog, false);
 		}
 	
 		public void CloseSetting ()
 		{
 				isTap = false;
 				Debug.LogError ("Close shop");
-				settingDialog.gameObject.SetActive (false);
-				isShowDialog = false;
+				GameBoard.CloseDialog (settingDialog, false);
 		}
 	
 		void ClickButton ()
@@ -260,9 +270,8 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		{
 				isTap = false;
 				Debug.Log ("On ShopClick");
-				isShowDialog = true;
-				shopDialog.Show (OnClickButton);
-				shopDialog.gameObject.SetActive (true);
+				
+				GameBoard.ShowDialog (shopDialog);
 		
 		}
 
@@ -275,13 +284,14 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		public void OnClickGift ()
 		{
 				isTap = false;
-				//				UpdateGold (50);
 				isGift = false;
 				ButtonGift.gameObject.SetActive (false);
+				Bullet.CreateGold (GIFTGOLD, ButtonGift.gameObject.transform.localPosition);
 		}
 	
 		public void OnClickItem ()
 		{
+//				isShowDialog = true;
 				GameBoard.ShowDialog (Constant.pathPrefabs + "Dialog/", "Warning", "The function is not open. Come back latter.", "Close", ClickButton);
 		}
 	
@@ -320,9 +330,8 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 						break;
 				}
 		
-				//				UpdateGold (g);
+				UpdateGold (g);
 		}
-
 
 		void LoadConfigManager ()
 		{

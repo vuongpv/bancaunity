@@ -15,7 +15,6 @@ public class MyAnimation : UISpriteAnimation
 		void Awake ()
 		{
 				RebuildSpriteList ();
-		transform.localRotation =Quaternion.Euler(0.0f, 0.0f, 180f)
 		}
 
 

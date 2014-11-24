@@ -38,7 +38,7 @@ public class Dialog : BaseDialog
 				centerButton.SetActive (true);
 				_ShowDialog (title, messager);
 				textCenter.text = button;
-				this.mCallback = callback;
+				SetCallBack (callback);
 		}
 	
 		public void ShowDialog (string title, string messager, string leftButton, string rightButton, string centerButton, Action callback)
@@ -66,6 +66,11 @@ public class Dialog : BaseDialog
 		public void CloseDialog (Dialog dl)
 		{
 				Destroy (dl);
+		}
+
+		public void SetCallBack (System.Action callback)
+		{
+				this.mCallback = callback;
 		}
 
 		public void OnClickButton ()
