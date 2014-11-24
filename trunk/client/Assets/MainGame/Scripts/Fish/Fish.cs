@@ -1,5 +1,32 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Holoville.HOTween;
+using GFramework;
+
+public enum FHFishState
+{
+		Swim = 0,
+		Dying,
+		Dead,
+}
+
+public enum FHFishViewType
+{
+		None,
+		Sprite2D,
+		Model3D,
+}
+
+[Serializable]
+public enum FishSpeed
+{
+		PARENT,// van toc theo group chua no
+		MINIMUM,// van toc toi thieu
+		NORMAL,// van toc trung binh
+		MAXIMUM,// van toc toi da
+}
 
 public class Fish : _MyGameObject
 {
@@ -12,15 +39,87 @@ public class Fish : _MyGameObject
 		protected float curren_Angle = 0, next_Angle = 0, offsetAngle, detaAngle;
 		protected MyAnimation mAnimation;
 		protected float price = 0;
+		private FHFishManager manager;
+		public FHRoute route;
+		[HideInInspector]
+		public FHFishSeason
+				season;
+		[HideInInspector]
+		public float
+				routeFactor = 0f;
 
+		public ConfigFishRecord configFish { get; private set; }
+
+		[HideInInspector]
+		public int
+				fishIdentify = 0;
+		public int groupID = -1;
+		private float fadeOutTime;
+		public const float FADE_TIME = 1f;
 		protected string[] fr_move, fr_die;
 
 		void Awake ()
 		{
 		
-				SetSpeed (Random.Range (0.005f, 0.01f));
+				SetSpeed (0.05f);
 				mAnimation = GetComponent<MyAnimation> ();
+				
 
+		}
+
+		public void SetManager (FHFishManager manager)
+		{
+				this.manager = manager;
+		}
+
+		public void Setup (ConfigFishRecord configFish, FHFishSeason season, FHRoute route)
+		{
+				this.configFish = configFish;
+				this.season = season;
+				this.route = route;
+
+				Debug.Log ("======== Setup: " + configFish.id);
+		
+				this.routeFactor = 0;
+		
+				transform.position = new Vector3 (0, 1000, 0);
+				transform.localScale = Vector3.one;
+				Init (configFish.id);
+		}
+
+		public void SetupInGroup (ConfigFishRecord configFish, FHFishSeason season, FHRoute route, int fishGroupID, FGCustomInfo fishGroupInfo, int index)
+		{
+				Setup (configFish, season, route);
+		
+//				if (fishGroupInfo == null || fishGroupInfo.GetNodes ().Length <= index)
+//						return;
+//		
+//				groupID = fishGroupID;
+//		
+//				FGCustomNode _element = fishGroupInfo.GetNodes () [index];
+//				if (_element.fishSpeed == FishSpeed.PARENT)
+//						internalSpeed = desSpeedDelay = GetSpeed (fishGroupInfo.baseSpeed);
+//				else
+//						internalSpeed = desSpeedDelay = GetSpeed (fishGroupInfo.GetNodes () [index].fishSpeed);
+//		
+//				posLocal = _element.GetPosition ();
+//				loopSin = _element.loopSin;
+//				heightSin = _element.heightSin;
+//		
+//				listEvent.Clear ();
+//				for (int i = 0; i < fishGroupInfo.customEvent.Count; i++) {
+//						FGCustomEvent _evt = fishGroupInfo.customEvent [i];
+//						if (_evt != null)
+//								listEvent [_evt] = false;
+//				}
+//		
+//				for (int i = 0; i < _element.customEvent.Count; i++) {
+//						FGCustomEvent _evt = _element.customEvent [i];
+//						if (_evt != null)
+//								listEvent [_evt] = false;
+//				}
+//		
+//				saveSpeed = internalSpeed;
 		}
 
 		public virtual void Init (int id)
@@ -160,8 +259,8 @@ public class Fish : _MyGameObject
 						};
 				
 						break;
-		default:
-			fr_move = new string[] {
+				default:
+						fr_move = new string[] {
 				"f2000" + mId + "_m_01",
 				"f2000" + mId + "_m_02",
 				"f2000" + mId + "_m_03",
@@ -171,7 +270,7 @@ public class Fish : _MyGameObject
 				"f2000" + mId + "_m_07",
 				"f2000" + mId + "_m_08"
 			};
-			fr_die = new string[] {
+						fr_die = new string[] {
 				"f2000" + mId + "_d_01",
 				"f2000" + mId + "_d_01",
 				"f2000" + mId + "_d_01",
@@ -182,7 +281,7 @@ public class Fish : _MyGameObject
 				"f2000" + mId + "_d_03",
 				"f2000" + mId + "_d_03"
 			};		
-			break;
+						break;
 				case 10:
 						fr_move = new string[]{
 				"f200" + mId + "_m_01",
@@ -285,36 +384,92 @@ public class Fish : _MyGameObject
 		// Update is called once per frame
 		public void Update ()
 		{
-				if (!mAnimation.IsUpdate ())
+//				if (!mAnimation.IsUpdate ()) {
+//						Debug.LogError ("=================================== bug here update");
+//						return;
+//				}
+
+				if (route == null) {
 						return;
+				}
+			
+		
+//				if (state == FHFishState.Swim) {
+//					
+//						routeFactor += Time.deltaTime * GetSpeed ();
+//			
+//						routeFactor = Mathf.Clamp01 (routeFactor);
+//			
+//						
+//						UpdateFishAlone ();
+//				
+//						if (routeFactor >= 1f)
+//								Despawn ();
+//				} else if (state == FHFishState.Dying) {
+//						fadeOutTime += Time.deltaTime;
+//						if (fadeOutTime > FADE_TIME) {
+//								state = FHFishState.Dead;
+//								Despawn ();
+//						}
+//				}
+
 				base.Update ();	
 				switch (mStatus) {
 				case (int)FISH_STATUS.ST_NORMAL:
-						if (curren_Angle != next_Angle) {
-								UpdateAngle ();
-						} else {
-								StartCoroutine (WaitingNextAngle ());
-						}
+//						if (curren_Angle != next_Angle) {
+//								UpdateAngle ();
+//						} else {
+//								StartCoroutine (WaitingNextAngle ());
+//						}
+//
+//
+//						Move (dx, dy);
+//						if (!CheckLimit ()) {
+//								RandomPosition ();		
+//						}
 
-
-						Move (dx, dy);
-						if (!CheckLimit ()) {
-								RandomPosition ();		
-						}
-
-
+						routeFactor += Time.deltaTime * GetSpeed ();
+			
+						routeFactor = Mathf.Clamp01 (routeFactor);
+			
+			
+						UpdateFishAlone ();
+			
+						if (routeFactor >= 1f)
+								Despawn ();
 
 						break;
 				case (int)FISH_STATUS.ST_DIE:
-						if (mAnimation.EndFrame ()) {
-								gameObject.SetActive (false);
-								RandomPosition ();
+//						if (mAnimation.EndFrame ()) {
+////								gameObject.SetActive (false);
+////								RandomPosition ();
+//								Despawn ();
+//				
+//				
+//						}
+
+						fadeOutTime += Time.deltaTime;
+						if (fadeOutTime > FADE_TIME) {
+								Despawn ();
 						}
+
 						break;
 				}
 		}
 
+		public void Despawn ()
+		{
+				this.manager.CollectFish (this);
+		}
 
+		void UpdateFishAlone ()
+		{
+				transform.position = route.GetPositionOnRoute (routeFactor);
+				transform.right = -MathfEx.GetForwardVector (route.GetOrientationOnRoute (routeFactor));
+		
+				if (transform.right.x < 0)
+						transform.localEulerAngles = new Vector3 (180.0f, transform.localEulerAngles.y, transform.localEulerAngles.z);
+		}
 
 		public void ChangeStatus (int newStatus)
 		{
@@ -355,6 +510,7 @@ public class Fish : _MyGameObject
 		{
 				return mStatus;
 		}
+
 		public virtual bool CheckLimit ()
 		{
 	
@@ -372,7 +528,7 @@ public class Fish : _MyGameObject
 		public virtual void RandomPosition ()
 		{
 				ChangeStatus ((int)FISH_STATUS.ST_NORMAL);
-				int r = Random.Range (0, 10);
+				int r = UnityEngine.Random.Range (0, 10);
 				float x, y, angle = 0;
 				switch (r) {
 				case 0:
@@ -380,14 +536,14 @@ public class Fish : _MyGameObject
 				case 2:
 				case 3:
 						x = leftLimit;
-						y = Random.Range (bottomLimit, topLimit - GetHeightSprite ()) + 1;
-						angle = Random.Range (-50, 50);
+						y = UnityEngine.Random.Range (bottomLimit, topLimit - GetHeightSprite ()) + 1;
+						angle = UnityEngine.Random.Range (-50, 50);
 						break;
 
 				default:
 						x = rightLimit + GetWidthSprite () / 2;
-						y = Random.Range (bottomLimit, topLimit - GetHeightSprite () + 1);
-						angle = Random.Range (140, 220);
+						y = UnityEngine.Random.Range (bottomLimit, topLimit - GetHeightSprite () + 1);
+						angle = UnityEngine.Random.Range (140, 220);
 						break;
 				}
 
@@ -408,7 +564,7 @@ public class Fish : _MyGameObject
 		IEnumerator WaitingNextAngle ()
 		{
 				yield return new WaitForSeconds (1f);
-				SetNextAngle (Random.Range (curren_Angle - 90, curren_Angle + 90));
+				SetNextAngle (UnityEngine.Random.Range (curren_Angle - 90, curren_Angle + 90));
 		}
 
 		private void UpdateAngle ()
