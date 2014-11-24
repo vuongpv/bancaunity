@@ -1,0 +1,2 @@
+id	name	totalTime	randomRoutes	configRouteDesign	scenes
+1	id_season_normal	200	0	ConfigRouteDesign	FishingOffline

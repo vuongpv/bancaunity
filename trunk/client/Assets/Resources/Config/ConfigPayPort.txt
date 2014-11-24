@@ -1,0 +1,9 @@
+id	name	logoName
+0	SMS	
+1	Play Store	
+2	Apple Store	
+3	Zing Card	logo_zing
+4	Mobi Card	logo_mobifone
+5	Vina Card	logo_vinaphone
+6	Viettel Card	logo_viettel
+1001	Diamond	
