@@ -1,0 +1,4 @@
+id	name	logo
+1	Mobi Card	logo_mobifone
+2	Vina Card	logo_vinaphone
+3	Viettel Card	logo_viettel
