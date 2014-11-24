@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: a5de8b3b97e0a491387dec9042ccd078
+labels:
+- CG
+- Mobile
+- Shader
+- light
+- fast
+ShaderImporter:
+  defaultTextures: []
+  userData: 

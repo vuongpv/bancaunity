@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: c2e9728e11c0f4f7dbf3d8fc861e788e
+labels:
+- CG
+- Mobile
+- Shader
+- light
+- planet
+ShaderImporter:
+  defaultTextures: []
+  userData: 

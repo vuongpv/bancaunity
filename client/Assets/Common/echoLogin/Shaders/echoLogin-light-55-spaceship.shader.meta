@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 356a7642335af4dffbe43df84e3a4f22
+labels:
+- CG
+- Mobile
+- Shader
+- light
+- spaceship
+ShaderImporter:
+  defaultTextures: []
+  userData: 

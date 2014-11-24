@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 991819b546f024dfd9686a57ea6b3a99
+labels:
+- CG
+- Mobile
+- Shader
+- color
+- solid
+- transparent
+- vertex
+ShaderImporter:
+  defaultTextures: []
+  userData: 
