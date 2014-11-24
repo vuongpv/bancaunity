@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Gold : _MyGameObject
@@ -26,7 +26,7 @@ public class Gold : _MyGameObject
 				if (!b)
 						return;
 
-				MoveTo (Gameplay.controlGold.transform.position.x, Gameplay.controlGold.transform.position.y);
+				MoveTo (FHFishSeasonManager.controlGold.transform.position.x, FHFishSeasonManager.controlGold.transform.position.y);
 
 		}
 
@@ -39,7 +39,7 @@ public class Gold : _MyGameObject
 		public override void AtTheTargetPosition ()
 		{
 				
-				Gameplay.UpdateGold (price);
+				FHFishSeasonManager.UpdateGold (price);
 				gameObject.SetActive (false);
 		}
 
