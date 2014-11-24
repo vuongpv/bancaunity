@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 
@@ -160,7 +160,7 @@ public class GameplayOffline : GameBoard
 				isTap = false;
 				Debug.Log ("OnSettingClick");
 				isShowDialog = true;
-				settingDialog.Show (OnClickButton);
+				settingDialog.SetCallBack (OnClickButton);
 				settingDialog.gameObject.SetActive (true);
 		
 		}
@@ -203,7 +203,7 @@ public class GameplayOffline : GameBoard
 				isTap = false;
 				Debug.Log ("On ShopClick");
 				isShowDialog = true;
-				shopDialog.Show (OnClickButton);
+				shopDialog.SetCallBack (OnClickButton);
 				shopDialog.gameObject.SetActive (true);
 			
 		}

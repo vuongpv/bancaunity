@@ -5,7 +5,7 @@ public class ShopDialog : BaseDialog
 {
 		System.Action mCallback;
 
-		public void Show (System.Action callback)
+		public override void SetCallBack (System.Action callback)
 		{
 				mCallback = callback;
 		}

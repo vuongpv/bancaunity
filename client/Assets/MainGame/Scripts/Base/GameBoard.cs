@@ -7,6 +7,7 @@ public class GameBoard : MonoBehaviour
 
 		public static bool isShowDialog = false;
 		public static BaseDialog currenDialog;
+
 		public static  BaseDialog  ShowDialog (string pathPrefabs)
 		{
 				if (isShowDialog)
@@ -24,8 +25,6 @@ public class GameBoard : MonoBehaviour
 				currenDialog = (Instantiate (Resources.Load (pathPrefabs + Constant.DefaultDialog)) as GameObject).GetComponent<Dialog> ();
 				((Dialog)currenDialog).ShowDialog (title, content, centerButton, callback);
 		}
-
-
 
 		public static  void ShowDialog (string pathPrefabs, string title, string content, string leftButton, string rightButton, string centerButton)
 		{
@@ -45,13 +44,27 @@ public class GameBoard : MonoBehaviour
 				((Dialog)currenDialog).ShowDialog (title, content, leftButton, rightButton, null);
 		}
 
-
-		public static void CloseDialog (BaseDialog	 dl)
+		public static void CloseDialog (BaseDialog	 dl, bool isDestroy)
 		{
 				Debug.LogWarning ("Closedialog");
-				GameObject.Destroy (dl.gameObject);
+				if (isDestroy)
+						GameObject.Destroy (dl.gameObject);
+				else
+						dl.gameObject.SetActive (false);
 				isShowDialog = false;
 		}
+
+		public void ShowDialog (BaseDialog	 dl)
+		{
+
+				if (null = dl)
+						return;
+				isShowDialog = true;
+				dl.gameObject.SetActive (true);
+
+		}
+
+
 
 
 }

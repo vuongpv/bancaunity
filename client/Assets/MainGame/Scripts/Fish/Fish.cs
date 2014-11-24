@@ -438,8 +438,8 @@ public class Fish : _MyGameObject
 						transform.right = -MathfEx.GetForwardVector (route.GetOrientationOnRoute (routeFactor));
 			
 						if (transform.right.x < 0) {
-								transform.localEulerAngles = new Vector3 (180.0f, transform.localEulerAngles.y, transform.localEulerAngles.z);
-								mAnimation.transform.localEulerAngles = new Vector3 (180.0f, mAnimation.transform.localEulerAngles.y, mAnimation.transform.localEulerAngles.z);
+								transform.localEulerAngles = new Vector3 (0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+								mAnimation.transform.localEulerAngles = new Vector3 (0, mAnimation.transform.localEulerAngles.y, mAnimation.transform.localEulerAngles.z);
 				
 						}
 			

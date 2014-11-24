@@ -16,7 +16,9 @@ public class Bullet : _MyGameObject
 
 		private string[] fr_move, fr_Net;
 
-		private List<Gold> golds;
+		[HideInInspector]
+		public static List<Gold>
+				golds;
 
 
 		public void Init (int id)
@@ -143,7 +145,7 @@ public class Bullet : _MyGameObject
 
 		}
 
-		public void CreateGold (float price, Vector2 position)
+		public static void CreateGold (float price, Vector2 position)
 		{
 				for (int i=0; i<golds.Count; i++) {
 						Gold g = golds [i];
