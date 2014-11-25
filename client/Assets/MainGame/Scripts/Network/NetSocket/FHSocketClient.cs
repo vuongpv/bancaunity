@@ -295,7 +295,7 @@ public class FHSocketClient : FHSocketBase
 								FHNetworkManager.Client ().SetNetworkException ();
 								Debug.LogError ("FH FH SSSSSSSSSSS" + evt.player_Names);
 						}
-						SceneManager.instance.LoadSceneWithLoading (FHScenes.Online);
+						SceneManager.instance.LoadSceneWithLoading (FishScenes.Online);
 						Debug.LogError ("FH FH OnRoomReady OKIE");
 				} catch (Exception ex) {
 						Debug.LogError ("FH FH FHSocketEvent_OnRoomReady Exception:" + ex.Message);

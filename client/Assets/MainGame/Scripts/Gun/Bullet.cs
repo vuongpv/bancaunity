@@ -5,21 +5,25 @@ using System.Collections.Generic;
 public class Bullet : _MyGameObject
 {
 		private int mId;
-	
 		private float xDesc, yDesc;
-
-		private float[] zoom = new float[] { 0.3f, 0.5f, 0.5f, 0.8f, 1f, 1.2f, 1.2f, 1f, 1f };
-
+		private float[] zoom = new float[] {
+				0.3f,
+				0.5f,
+				0.5f,
+				0.8f,
+				1f,
+				1.2f,
+				1.2f,
+				1f,
+				1f
+		};
 		private float mAngle;
 		protected MyAnimation mAnimation;
 		private int mStatus;
-
 		private string[] fr_move, fr_Net;
-
 		[HideInInspector]
 		public static List<Gold>
 				golds;
-
 
 		public void Init (int id)
 		{
@@ -36,8 +40,6 @@ public class Bullet : _MyGameObject
 				LoadGolds ();
 
 		}
-
-
 
 		public void LoadFrame (int id)
 		{
@@ -75,7 +77,7 @@ public class Bullet : _MyGameObject
 				switch (mStatus) {
 				case (int)BULLET_STATUS.MOVE:
 						break;
-				case (int)BULLET_STATUS.ATDESC:
+				case (int)BULLET_STATUS.AT_DESC:
 						transform.localScale = new Vector3 (zoom [mAnimation.GetIndexFrame ()], zoom [mAnimation.GetIndexFrame ()], zoom [mAnimation.GetIndexFrame ()]);
 						if (mAnimation.EndFrame ()) {
 								ChangeStatus ((int)BULLET_STATUS.MOVE);
@@ -86,7 +88,6 @@ public class Bullet : _MyGameObject
 				}
 		}
 
-
 		public MyAnimation getanimation ()
 		{
 				return mAnimation;
@@ -94,8 +95,6 @@ public class Bullet : _MyGameObject
 
 		public void setDec (float xD, float yD)
 		{
-
-
 				xDesc = xD;
 				yDesc = yD;
 
@@ -111,7 +110,7 @@ public class Bullet : _MyGameObject
 						mAnimation.SetFrame (fr_move);
 						box.size = Vector2.one;
 						break;
-				case (int) BULLET_STATUS.ATDESC:
+				case (int) BULLET_STATUS.AT_DESC:
 						mAnimation.SetFrame (fr_Net);
 						box.size = new Vector2 (GetWidthSprite (), GetHeightSprite ());
 						break;
@@ -120,20 +119,20 @@ public class Bullet : _MyGameObject
 
 		public override  void AtTheTargetPosition ()
 		{
-				ChangeStatus ((int)BULLET_STATUS.ATDESC);
+				ChangeStatus ((int)BULLET_STATUS.AT_DESC);
 		}
 
 		void OnCollisionEnter (Collision collision)
 		{
-//		Debug.Log ("OnCollisionEnter");
+				Debug.LogError ("OnCollisionEnter");
 		}
 
 		void OnTriggerEnter (Collider other)
 		{
-//		Debug.Log ("OnTriggerEnter: "+mStatus);
 
-				if (mStatus != (int)BULLET_STATUS.ATDESC)
+				if (mStatus != (int)BULLET_STATUS.AT_DESC) {
 						return;
+				}
 
 				Fish f = other.gameObject.GetComponent<Fish> ();
 				if (null != f) {
@@ -176,5 +175,5 @@ public class Bullet : _MyGameObject
 enum BULLET_STATUS
 {
 		MOVE=0,
-		ATDESC=1,
+		AT_DESC=1,
 };

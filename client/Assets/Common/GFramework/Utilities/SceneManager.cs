@@ -5,7 +5,7 @@ public enum SceneTransitionType
 {
 }
 
-public class FHScenes
+public class FishScenes
 {
 		public const string Intro = "Intro";
 
@@ -22,7 +22,7 @@ public class SceneManager : SingletonMono<SceneManager>
 
 		void Start ()
 		{
-				Application.LoadLevel (FHScenes.MainMenu);
+				Application.LoadLevel (FishScenes.MainMenu);
         
 		}
 
@@ -48,6 +48,6 @@ public class SceneManager : SingletonMono<SceneManager>
 		public void BackToMM ()
 		{
 				FHNetworkManager.Instance.ResetSocketClient ();
-				SceneManager.instance.LoadSceneWithLoading (FHScenes.MainMenu);
+				SceneManager.instance.LoadSceneWithLoading (FishScenes.MainMenu);
 		}
 }

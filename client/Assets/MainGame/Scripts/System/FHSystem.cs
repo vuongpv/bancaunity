@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using SimpleJSON;
@@ -80,13 +80,13 @@ public class FHSystem : SingletonMono<FHSystem>
 		public FHPlayerMode GetCurrentPlayerMode ()
 		{
 				switch (Application.loadedLevelName) {
-				case FHScenes.Single:
+				case FishScenes.Single:
 						return FHPlayerMode.Single;
 			
 //				case FHScenes.Multi:
 //						return FHPlayerMode.Multi;
 			
-				case FHScenes.Online:
+				case FishScenes.Online:
 						return FHPlayerMode.Online;
 				}
 		
