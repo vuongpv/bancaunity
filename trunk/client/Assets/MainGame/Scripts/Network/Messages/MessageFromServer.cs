@@ -123,7 +123,7 @@ public class M_S_RoomReady : M_S_Base
 						Debug.LogError ("FH FH SSSSSSSSSSS" + player_Names);
 				}
 		
-				SceneManager.instance.LoadSceneWithLoading (FHScenes.Online);
+				SceneManager.instance.LoadSceneWithLoading (FishScenes.Online);
 				Debug.LogError ("FH FH OnRoomReady OKIE");
 		}
 }

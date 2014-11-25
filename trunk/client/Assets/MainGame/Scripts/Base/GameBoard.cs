@@ -54,10 +54,10 @@ public class GameBoard : MonoBehaviour
 				isShowDialog = false;
 		}
 
-		public void ShowDialog (BaseDialog	 dl)
+		public static void ShowDialog (BaseDialog	 dl)
 		{
 
-				if (null = dl)
+				if (null == dl)
 						return;
 				isShowDialog = true;
 				dl.gameObject.SetActive (true);

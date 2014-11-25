@@ -80,43 +80,12 @@ public class GameplayOffline : GameBoard
 
 				Fish f = null;
 
-				switch (id) {
-				case 7:
-						f = (Instantiate (Resources.Load (Constant.pathPrefabs + "Fishs/Fish07")) as GameObject).GetComponent<Fish07> ();
-						f.SetCamera (mView);
-						f.transform.parent = transform.FindChild ("Object").transform.FindChild ("Fishs").transform;
-						f.Init (id);
-						break;
-				case 10:
-				case 6:
-						f = (Instantiate (Resources.Load (Constant.pathPrefabs + "Fishs/Jellyfish")) as GameObject).GetComponent<Jellyfish> ();
-						f.SetCamera (mView);
-						f.transform.parent = transform.FindChild ("Object").transform.FindChild ("Fishs").transform;
-						f.Init (id);
-						break;
-				case 15:
-				case 16:
-				case 17:
-						f = (Instantiate (Resources.Load (Constant.pathPrefabs + "Fishs/Mermaid")) as GameObject).GetComponent<Mermaid> ();
-						f.SetCamera (mView);
-						f.transform.parent = transform.FindChild ("Object").transform.FindChild ("Fishs").transform;
-						f.Init (id);
-						break;
-//		case 1:
-//		case 2:
-//			f=(Instantiate (Resources.Load (Constant.pathPrefabs+"Fishs/FishForum")) as GameObject).GetComponent<FishForum>();
-//			f.SetCamera( mView);
-//			f.transform.parent =transform.FindChild("Object").transform.FindChild("Fishs").transform;
-//			f.Init(id);
-
-						break;
-				default:
-						f = (Instantiate (Resources.Load (Constant.pathPrefabs + "Fishs/Fish")) as GameObject).GetComponent<Fish> ();
-						f.SetCamera (mView);
-						f.transform.parent = transform.FindChild ("Object").transform.FindChild ("Fishs").transform;
-						f.Init (id);
-						break;
-				}
+//		
+				f = (Instantiate (Resources.Load (Constant.pathPrefabs + "Fishs/Fish")) as GameObject).GetComponent<Fish> ();
+				f.SetCamera (mView);
+				f.transform.parent = transform.FindChild ("Object").transform.FindChild ("Fishs").transform;
+				f.Init (id);
+						
 
 				f.SetPrice (float.Parse (data [5]));
 
@@ -194,7 +163,7 @@ public class GameplayOffline : GameBoard
 		{
 				isTap = false;
 				if (UICamera.selectedObject.name.Equals ("Close")) {
-						GameplayOffline.CloseDialog (GameplayOffline.currenDialog);
+						GameplayOffline.CloseDialog (GameplayOffline.currenDialog, true);
 				}
 		}
 

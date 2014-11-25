@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class FHFishManager : SingletonMono<FHFishManager>
+public class FishManager : SingletonMono<FishManager>
 {
 		private SpawnPool fishPool;
 	
-		string LOG = "FHFishManager: ";
 	
 		private Dictionary<int, GameObject> fishPrefabs = new Dictionary<int, GameObject> ();
 	
@@ -27,7 +26,6 @@ public class FHFishManager : SingletonMono<FHFishManager>
 	
 		public void CollectFish (Fish fish)
 		{
-				//		Debug.Log (LOG+"CollectFish");
 				if (fish.gameObject.active) {
 						fishPool.Despawn (fish.transform);
 						activeFishes.Remove (fish);
@@ -36,8 +34,6 @@ public class FHFishManager : SingletonMono<FHFishManager>
 	
 		public Fish SpawnFish (int fishID)
 		{
-				//		Debug.Log (LOG+"SpawnFish");
-				
 				Transform obj = fishPool.Spawn (fishPrefabs [fishID].transform);
 				Fish fish = obj.GetComponent<Fish> ();
 				fish.SetManager (this);
@@ -50,7 +46,6 @@ public class FHFishManager : SingletonMono<FHFishManager>
 	
 		public HashSet<Fish> GetActiveFishes ()
 		{
-				//		Debug.Log (LOG+"GetActiveFishes");
 				return activeFishes;
 		}
 }

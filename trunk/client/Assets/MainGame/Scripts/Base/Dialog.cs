@@ -68,7 +68,7 @@ public class Dialog : BaseDialog
 				Destroy (dl);
 		}
 
-		public void SetCallBack (System.Action callback)
+		public override void SetCallBack (System.Action callback)
 		{
 				this.mCallback = callback;
 		}

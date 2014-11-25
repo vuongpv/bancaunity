@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using GFramework;
@@ -91,7 +91,7 @@ public class FHFishSeason : MonoBehaviour
 						lastSecondTime = current;
 				}
 		
-				if (FHFishManager.instance.GetActiveFishes ().Count == 0 && elapsedTime >= totalTime)
+				if (FishManager.instance.GetActiveFishes ().Count == 0 && elapsedTime >= totalTime)
 						finished = true;
 		
 				if (!finished)
@@ -138,7 +138,7 @@ public class FHFishSeason : MonoBehaviour
 	 */
 		void SpawnFish (FHFishData fishData, FHRoute route)
 		{
-				Fish fish = FHFishManager.instance.SpawnFish (fishData.fishID);
+				Fish fish = FishManager.instance.SpawnFish (fishData.fishID);
 				ConfigFishRecord configFish = ConfigManager.configFish.GetFishByID (fishData.fishID);
 		
 				if (fish == null || route == null || configFish == null)
@@ -179,7 +179,7 @@ public class FHFishSeason : MonoBehaviour
 				yield return new WaitForSeconds (timeAppear);
 		
 		
-				Fish fish = FHFishManager.instance.SpawnFish (fishID);
+				Fish fish = FishManager.instance.SpawnFish (fishID);
 				ConfigFishRecord configFish = ConfigManager.configFish.GetFishByID (fishID);
 		
 				if (fish == null || route == null || configFish == null)

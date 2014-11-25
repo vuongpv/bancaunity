@@ -16,8 +16,13 @@ public class RoutesEditor : EditorWindow
 		[MenuItem("FishHunt/Open the Routes Editor")]
 		static public void OpenRoutesEditor ()
 		{
-				EditorWindow.GetWindow<RoutesEditor> (false, "Routes Editor", true);
-		}
+				Debug.LogError ("===============open");
+				try {
+						EditorWindow.GetWindow<RoutesEditor> (false, "Routes Editor", true);
+				} catch {
+						Debug.LogError ("Can't open tool: ");
+				}
+		} 
 
     #region GUI
 		void OnGUI ()

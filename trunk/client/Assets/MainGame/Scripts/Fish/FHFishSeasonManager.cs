@@ -172,7 +172,7 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		{
 				List<int> listSeasonID = null;
 		
-				if (Application.loadedLevelName == FHScenes.Online)
+				if (Application.loadedLevelName == FishScenes.Online)
 						listSeasonID = listNormalSeasonID;
 				else {
 						if (currentSeasonID == -1 || IsSpecialSeason (listSeason [currentSeasonID].id) || listSpecialSeasonID.Count <= 0) {
@@ -262,7 +262,7 @@ public class FHFishSeasonManager : SingletonMono<FHFishSeasonManager>
 		{
 				isTap = false;
 				if (UICamera.selectedObject.name.Equals ("Close")) {
-						GameBoard.CloseDialog (GameplayOffline.currenDialog);
+						GameBoard.CloseDialog (GameplayOffline.currenDialog, true);
 				}
 		}
 	
