@@ -1,0 +1,9 @@
+id	name	totalTime	randomRoutes	configRouteDesign	scenes
+1	id_season_normal	40	1	ConfigRouteDesign	FishHuntSingle;FishHuntOnline
+2	id_season_multi	200	1	ConfigRouteDesign	FishHuntMulti
+102	id_season_firework1	10	0	ConfigRouteDesignFireWork1	FishHuntSingle
+103	id_season_special_2	40	0	ConfigRouteDesignSpecial2	FishHuntSingle
+104	id_season_special_3	20	0	ConfigRouteDesignSpecial3	FishHuntSingle
+105	id_season_special_4	60	0	ConfigRouteDesignSpecial4	FishHuntSingle
+106	id_season_special_5	15	0	ConfigRouteDesignSpecial5	FishHuntSingle
+107	id_season_special_1	30	0	ConfigRouteDesignSpecial1	FishHuntSingle

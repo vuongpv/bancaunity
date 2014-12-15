@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: e6090458ce4304e22b82ff54cf4b17eb
+labels:
+- c#
+- script
+- echoShaderManager
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}

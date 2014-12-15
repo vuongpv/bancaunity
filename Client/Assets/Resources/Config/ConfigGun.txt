@@ -1,0 +1,14 @@
+id	Prefab Name	Bullet name	Impact Effect	Bullet Speed	Bullet AOE	Bullet price	Cooldown	Max hits	Hit rate multiplier
+1	id_gun_1	id_bullet_1	id_eff_impact_1	35	1	1	0.2	1	1
+2	id_gun_2	id_bullet_1	id_eff_impact_2	35	1.5	2	0.2	2	1
+3	id_gun_3	id_bullet_3	id_eff_impact_3	30	2	3	0.2	3	1
+4	id_gun_4	id_bullet_3	id_eff_impact_4	30	2.5	4	0.2	4	1
+5	id_gun_5	id_bullet_5	id_eff_impact_5	15	3	5	0.2	5	1
+6	id_gun_6	id_bullet_6	id_eff_impact_6	15	3	5	0.2	5	1
+7	id_gun_7	id_bullet_7	id_eff_impact_7	15	3	5	0.2	5	1
+8	id_gun_8	id_bullet_8	id_eff_impact_8	15	4	8	0.2	6	1
+9	id_gun_9	id_bullet_8	id_eff_impact_9	15	4	8	0.2	6	1
+10	id_gun_10	id_bullet_10	id_eff_impact_10	15	5	10	0.2	8	1
+101	id_gun_101	id_bullet_101	id_eff_impact_101	35	10	25	1	10	30
+102	id_gun_102	id_bullet_102	id_eff_impact_102	10	10	99	1	50	30
+103	id_gun_103	id_bullet_103	id_eff_impact_103	10	10	0	1	15	20

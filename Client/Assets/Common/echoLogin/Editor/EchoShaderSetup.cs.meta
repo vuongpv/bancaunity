@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 672936029ac494ffa94ed91114427b6b
+labels:
+- Shader
+- editor
+- script
+- setup
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
