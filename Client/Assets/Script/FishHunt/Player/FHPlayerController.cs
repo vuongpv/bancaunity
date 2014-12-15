@@ -5,12 +5,14 @@ using GFramework;
 using System;
 using Holoville.HOTween;
 
+
 public class FHPlayerController : MonoBehaviour
 {
 		// GUI
 		public FHGunHudPanel gunHudPanel;
 		public FHPlayerHudPanel playerHudPanel;
 		public FHGoldHudPanel goldHudPanel;
+		public FHItems items;
 
 
 		public GameObject gunAnchor;
@@ -18,6 +20,7 @@ public class FHPlayerController : MonoBehaviour
 		public Collider dragCollider;
 		public GameObject pick;
 		public bool isDragging;
+
 
 		protected float initialAngle = 1;
 
@@ -109,7 +112,12 @@ public class FHPlayerController : MonoBehaviour
 				scheduler.Update ();
 
 				goldHudPanel.UpdateGold ();
+
+				
 		}
+
+
+
 
 	#region [ Input events ]
 
@@ -117,7 +125,6 @@ public class FHPlayerController : MonoBehaviour
 		{
 				if (targetGunID != -1)
 						return;
-
 				isDragging = true;
 				currentGun.SetTarget (hitPoint);
 
@@ -128,26 +135,30 @@ public class FHPlayerController : MonoBehaviour
 		}
 
 
+
 		public virtual void OnFingerUp ()
 		{
 				isDragging = false;
-
 				if (currentGun.configGun.id > 100) {
 						if (targetGunID == -1)
 								currentGun.FireBullet ();
 				} else
 						currentGun.ReleaseTrigger ();
+				items.OnFingerUp ();
 		}
 
 
 		public virtual void OnFingerMove (Vector3 hitPoint)
 		{
+				items.OnFingerMove (hitPoint);
+
 				if (targetGunID != -1)
 						return;
 
 				currentGun.SetTarget (hitPoint);
 		}
 
+		
 	#endregion
 
 		public virtual void SubCoin (int subValue)
