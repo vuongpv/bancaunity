@@ -68,10 +68,8 @@ public class FHSettingPanel : MonoBehaviour
 						break;
 
 				case "HelpBtn":
-						if (Application.loadedLevelName == FHScenes.Online) {
-								GuiManager.ShowPanel (GuiManager.instance.guiChat);
-						} else
-								GuiManager.ShowPanel (GuiManager.instance.guiHelp);
+						
+						GuiManager.ShowPanel (GuiManager.instance.guiShop);
 						Hide ();
 						break;
 

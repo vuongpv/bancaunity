@@ -32,7 +32,11 @@ public class GuiManager : SingletonMono<GuiManager>
 		public GUIDialogBase guiRanking = null;
 		public GUIDialogBase guiChat = null;
 		public GUIDialogBase guiMission = null;
+		public GUIDialogBase guiShop = null;
+
+
 		public GameObject blackBorder;
+
 
 		public Camera GetUICamera ()
 		{
