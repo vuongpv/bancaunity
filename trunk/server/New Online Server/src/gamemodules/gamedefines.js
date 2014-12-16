@@ -5,7 +5,15 @@ exports.RequestType = {
     CreateUserInfo		: 2,
     GetUserInfo			: 3,
 
-    GetPublicRoomList   : 4
+    GetPublicRoomList   : 4,
+    GetInfor:11,
+    RoomPrices:12,
+    JoinWaittingRoom:20,
+
+    Ranking:100,
+    Mission:101,
+
+    TestDB              : 1000
 };
 
 
@@ -23,6 +31,15 @@ exports.MessageType = {
     BenchMark:8,
     PlayAuto:9,
     ReConnect:10,
+    SysPosition:20,//thong bao co su thay doi trong phong
+    ResultJoinRoom:21,//Vi tri chon khong thah cong
+    UpdateProperties:22,//update properties of account
+    MeLeaveRoom:23,
+    MeLeaveWaitingRoom:24,
+    UserLeaveRoom:25,
+    MeJoinRoom_Ok:26,
+
+
     // logicGame
     FigureDown: 101,
     FigureUp: 102,
@@ -32,5 +49,6 @@ exports.MessageType = {
     UpgradeGun: 106,
     ChangeMoney: 107,
     ChangeLevel: 108,
-    StopShot: 109
+    StopShot: 109,
+    RecivePresent: 110
 };

@@ -3,7 +3,7 @@
 var _ = require("underscore");
 var logger = require('log4js').getLogger("GAMESERVER");
 logger.setLevel("DEBUG");
-var utils = require("../utils");
+var utils = require("../utils/utils");
 var client = require("./client");
 var gamedefines = require("./gamedefines");
 

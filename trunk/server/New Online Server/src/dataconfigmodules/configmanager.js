@@ -4,7 +4,7 @@
 "use strict";
 
 var logger = require('log4js').getLogger("CONFIG");
-var utils = require("../utils");
+var utils = require("../utils/utils");
 var csv = require('ya-csv'),
     _ = require('underscore'),
     async = require('async'),
@@ -12,17 +12,21 @@ var csv = require('ya-csv'),
 
 var mapData = [];
 var TableIndexs = exports.TableIndexs = {
-    "FISH": 1,
-    "FISH_COLLECTION": 2
+    "MISSION": 1,
+    "ROOM":2
 };
 
 exports.loadData = function (onFinish) {
 
     async.parallel([
-//        function(callback)
-//        {
-//            loadConfigData("../config/share/ConfigFish.csv", "FISH", defineDataConfig.fishDataColums, "id", true, false, callback);
-//        }
+        function(callback)
+        {
+            loadConfigData("../config/ConfigMission.csv", "MISSION", defineDataConfig.missionDataColumns, "ID", true, false, callback);
+        },
+        function(callback)
+        {
+            loadConfigData("../config/ConfigRoom.csv", "ROOM", defineDataConfig.roomDataColumns, "ID", true, false, callback);
+        }
 
     ],
     function(err){
@@ -41,7 +45,7 @@ exports.loadData = function (onFinish) {
 
 var loadRoomData = function(callback)
 {
-//    loadConfigData("../config/server/ConfigRoom.csv","ROOMS",defineDataConfig.roomDataColumn,"Idx",true, false,callback);
+
 };
 
 exports.loadDynamicConfig = function(){

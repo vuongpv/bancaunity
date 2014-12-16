@@ -4,6 +4,10 @@
 var logger = require('log4js').getLogger("APP");
 logger.setLevel("DEBUG");
 var uuid = require('node-uuid');
+var dbManager = require('./databasemodules/dbmanager');
+var roommodule=require('./gamemodules/gamehandler/roommodule');
+var configManager = require("./dataconfigmodules/configmanager");
+var missionmodule = require('./gamemodules/gamehandler/missionmodule');
 
 //console.log(uuid.v1());
 //console.log(uuid.v1());
@@ -23,7 +27,20 @@ io.set('log level', 2);//log level 0:error, 1 warn, 2 info, 3 debug
 
 //create game server
 exports.gameServerIO = require('./gamemodules/gameserver').start(io);
-
+exports.chatServerIO = require('./gamemodules/chatserver').start(io);
 logger.debug("server is running");
 
-
+dbManager.initDB(function(err){
+    if(err){
+        logger.error(err);
+    }else{
+        //init some modules in here
+        logger.info("Finish init DB");
+    }
+});
+configManager.loadData(function()
+{
+    console.log("da load thanh cong config");
+    missionmodule.initMissionDetail();
+    roommodule.InitRooms();
+});
