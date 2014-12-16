@@ -4,12 +4,17 @@
 var logger = require('log4js').getLogger("CLIENT")
     , _ = require('underscore')
     , defines = require('../defines')
-    , utils = require('../utils')
+    , utils = require('../utils/utils')
     , async = require("async")
     , gameserver = require('./gameserver')
     , uuid = require('node-uuid');
 
 var roomModule = require("./gamehandler/roommodule");
+
+var accountmodule = require("./gamehandler/accountmodule");
+var roommodule = require("./gamehandler/roommodule");
+var rankingmodule = require("./gamehandler/rankingmodule");
+var missionmodule = require("./gamehandler/missionmodule");
 
 var requestType = require("./gamedefines").RequestType;
 var messageType = require("./gamedefines").MessageType;
@@ -20,7 +25,7 @@ logger.setLevel("DEBUG");
 //var loginModule = require("./gamehandler/loginmodule");
 
 
-module.exports.Client = function (socket, server)
+exports.Client = function (socket, server)
 {
     logger.info("client " + socket.id + " connect to server");
 
@@ -34,15 +39,10 @@ module.exports.Client = function (socket, server)
     this.userName = null;
     this.nickName = null;
     this.roomName = null;
-
+    this.positions = null;
     //user data
-//    this.userData = null;//tham chieu toi data DB
+    this.userData = null;//tham chieu toi data DB
 
-    //view data tinh sau
-    this.playerDataView = {
-        pos: null,
-        actpos: -1
-    };
     //end member
 
     //save parent
@@ -128,11 +128,13 @@ module.exports.Client = function (socket, server)
     {
         logger.debug("destroyMe:" + socket.client);
 
+
         if(self.uid != null && gameserver.mapClientsByUid.hasOwnProperty(self.uid) && gameserver.mapClientsByUid[self.uid] != null)
             delete gameserver.mapClientsByUid[self.uid];
 
         if(socket.client != null)
         {
+            roommodule.OnDestroyMe(socket.client);
             socket.client = null;
             delete socket.client;
         }
@@ -166,20 +168,35 @@ module.exports.Client = function (socket, server)
     //login
 //    requestHandlers[requestType.Login]          = loginModule.onLogin;
 //    requestHandlers[requestType.CreateUserInfo] = loginModule.onCreateUserInfo;
-
+//    requestHandlers[requestType.GetInfor]=roomModule.OnInformationPlayer;
+    requestHandlers[requestType.RoomPrices]=roommodule.GetListRoom;
+    requestHandlers[requestType.Login] = accountmodule.Login;
+    requestHandlers[requestType.GetInfor]=accountmodule.GetProperties;
+    requestHandlers[requestType.JoinWaittingRoom]=roommodule.OnJoinWaitingRoom;
+    requestHandlers[requestType.Ranking] = rankingmodule.GetDailyRanking;
+    requestHandlers[requestType.Mission] = missionmodule.GetMission;
 
     //register handlers
     var messageHandlers = {};
 
     //Test function
 //    messageHandlers[messageType.TestFunc] = friendModule.onRequestTestFunc;
-    messageHandlers[messageType.Subscribe] = roomModule.OnUserSubscribe;
+//    messageHandlers[messageType.Subscribe] = roomModule.OnUserSubscribe;
+
+    messageHandlers[messageType.Subscribe] = roommodule.OnUserJoinRoom;
+
     messageHandlers[messageType.SycnReady] = roomModule.OnUserReady;
     messageHandlers[messageType.ClientLogic] = roomModule.OnUserLogClientLogic;
-    messageHandlers[messageType.FinalResult] = roomModule.OnUserFinalResult;
+//    messageHandlers[messageType.FinalResult] = roomModule.OnUserFinalResult;
     messageHandlers[messageType.BenchMark] = roomModule.OnBenchMark;
-    messageHandlers[messageType.PlayAuto] = roomModule.OnUserPlayAuto;
     messageHandlers[messageType.ReConnect] = roomModule.OnUserReconnect;
+    messageHandlers[messageType.UpdateProperties]=accountmodule.OnUpdateProperties;
+    messageHandlers[messageType.MeLeaveWaitingRoom]=roomModule.OnLeaveWaitingRoom;
+    messageHandlers[messageType.MeLeaveRoom]=roomModule.OnLeaCurrentRoom;
+//    messageHandlers[messageType.UserLeaveRoom]=roomModule.OnLeaCurrentRoom;
+    messageHandlers[messageType.RecivePresent]=missionmodule.GetPresent;
+
+
 
 };
 

@@ -1,0 +1,60 @@
+{
+  "_id" : ObjectId("5477e78266c752cc0fde95fc"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 0,
+  "price" : 100,
+  "name" : "Room1",
+  "id" : "0",
+  "__v" : 0
+},
+{
+  "_id" : ObjectId("5477e78266c752cc0fde95fd"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 1,
+  "price" : 200,
+  "name" : "Room2",
+  "id" : "1",
+  "__v" : 0
+},
+{
+  "_id" : ObjectId("5477e78266c752cc0fde95fe"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 0,
+  "price" : 300,
+  "name" : "Room3",
+  "id" : "2",
+  "__v" : 0
+},
+{
+  "_id" : ObjectId("5477e78266c752cc0fde95ff"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 1,
+  "price" : 400,
+  "name" : "Room4",
+  "id" : "3",
+  "__v" : 0
+},
+{
+  "_id" : ObjectId("5477e78266c752cc0fde9600"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 0,
+  "price" : 500,
+  "name" : "Room 5",
+  "id" : "4",
+  "__v" : 0
+},
+{
+  "_id" : ObjectId("5477e78266c752cc0fde9601"),
+  "maxUser" : 3,
+  "isDiamond" : false,
+  "skintype" : 1,
+  "price" : 600,
+  "name" : "Room6",
+  "id" : "5",
+  "__v" : 0
+}
