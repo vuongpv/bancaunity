@@ -322,12 +322,8 @@ public class FHTableRoomCotnroller : SingletonMono<FHTableRoomCotnroller>
 								ResponseLogin res = resp as ResponseLogin;
 								if (res.retCode == (int)ResultCode.OK) {
 										string uid = res.uid;
-										Debug.LogError ("isMission: " + res.isMission);
 										FHUsersManager.instance.CreatePlayerMe (uid);
 								}});
-			
-//						FHUsersManager.instance.CreatePlayerMe (result.uid);
-			
 				});
 		
 				for (int i=0; i<waitingJoinRoom.Length; i++) {
@@ -337,8 +333,8 @@ public class FHTableRoomCotnroller : SingletonMono<FHTableRoomCotnroller>
 	
 		public void ShowWaiting (int idx)
 		{
-				GuiManager.ShowPanel (GuiManager.instance.guiChat);
-				//waitingJoinRoom [idx].SetActiveRecursively (true);
+				waitingJoinRoom [idx].SetActiveRecursively (true);
+//				GuiManager.ShowPanel (GuiManager.instance.guiChat);
 		}
 	
 		public void OnBetItemClick (int index)
@@ -404,41 +400,14 @@ public class FHTableRoomCotnroller : SingletonMono<FHTableRoomCotnroller>
 				//        GoogleAnalyticsBinding.SendEvent("OnlineMode", "JoinRoomDiamond", "online", 1);
 		}
 	
-//		public IEnumerator StartJoinRoomDiamond ()
-//		{
-//				yield return new WaitForSeconds (1);
-//				//        client.JoinRoom(roomType, FHUtils.GetPlayerName());
-//		}
-//	
-//		public IEnumerator StartJoinRoom ()
-//		{
-//				yield return new WaitForSeconds (1);
-//				Debug.Log ("Joining room");
-//				//        client.JoinRoom(roomType, FHUtils.GetPlayerName());
-//		
-//				FHNetworkManager.JoinPlay ((int)roomType, FHUtils.GetPlayerName ());
-//		
-//				//StartCoroutine(StartJoinRoomAI());
-//		}
+
 		public IEnumerator StartJoinFishRoom ()
 		{
 				yield return new WaitForSeconds (1);
-				Debug.Log ("Joining fish room: " + roomJoin.id + ", name: " + roomJoin.name + ",position: " + position);
 				FHNetworkManager.JoinFishRoom (roomJoin.id, FHUtils.GetPlayerName (), position);
 		}
 
-//		public IEnumerator StartJoinRoomAI ()
-//		{
-//				yield return new WaitForSeconds (FHUtils.WAIT_PLAY_AUTO);
-//				Debug.Log ("Joining room AI");
-//				//client.JoinPlayAuto((int)roomType, client.roomName);
-//		
-//				FHNetworkManager.JoinPlayAuto ((int)roomType, FHNetworkManager.userName);
-//		
-//				//StartCoroutine(TimeOutJoinRoom());
-//				//        GoogleAnalyticsBinding.SendEvent("OnlineMode", "JoinAI", "online", 1);
-//		
-//		}
+
 
 		public IEnumerator TimeOutJoinRoom ()
 		{
@@ -449,7 +418,6 @@ public class FHTableRoomCotnroller : SingletonMono<FHTableRoomCotnroller>
 
 		public void OnCloseFunc ()
 		{
-				//        client.Close();
 				StopCoroutine ("ChangeTextWaiting");
 				GuiManager.HidePanel (GuiManager.instance.guiOnlinePlay);
 				GameObject.Destroy (client);

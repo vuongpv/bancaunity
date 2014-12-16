@@ -7,11 +7,9 @@ public class FHSceneOnlineController : SingletonMono<FHSceneOnlineController>
 {
 		public UIOnlineFinalScore onlineFinalResult;
 		public FHPlayerOnline[] players;
-		public GameObject[] buttonDec, buttonInc;
+		public GameObject[] buttonDec, buttonInc, panelPlayers;
 		public GameObject WaitMenu;
 		public UILabel lblTimePlay;
-
-
 
 		public UISprite coinOver1;
 		public UISprite coinOver2;
@@ -81,17 +79,22 @@ public class FHSceneOnlineController : SingletonMono<FHSceneOnlineController>
 						FHUserOnlinePlay user = roomData.listPlayer [i];
 						
 						if (user.uid.Equals (FHUsersManager.instance.UserMe.ClientId)) {// player me
+								players [user.location].gameObject.SetActive (true);
+								panelPlayers [user.location].gameObject.SetActive (true);
 								players [user.location].SetupOnline (user, roomData.isDiamondRoom);
 								playerInfoMe = user;
 				
 								BoxCollider box = players [user.location].GetComponent<BoxCollider> ();
 								box.gameObject.SetActive (true);
 								box.enabled = true;
+
 								players [user.location].isMainPlayer = true;
-								buttonDec [user.location].SetActive (true);
-								buttonInc [user.location].SetActive (true);
+								buttonDec [user.location].GetComponent<BoxCollider> ().enabled = true;
+								buttonInc [user.location].GetComponent<BoxCollider> ().enabled = true;
 								
 						} else { // setup for another player
+								players [user.location].gameObject.SetActive (true);
+								panelPlayers [user.location].gameObject.SetActive (true);
 								players [user.location].isMainPlayer = false;
 								players [user.location].SetupOnline (user, roomData.isDiamondRoom);
 						}
@@ -617,7 +620,6 @@ public class FHSceneOnlineController : SingletonMono<FHSceneOnlineController>
 				
 				onlineFinalResult.Show (matchResult, _finalreward);
 
-//				Debug.LogError ("=============================update gold: " + FHPlayerProfile.instance.gold);
 				FHNetworkManager.SendMessageToServer (new M_C_UpdateProperties (playerInfoMe.uid, 0, FHPlayerProfile.instance.gold, FHPlayerProfile.instance.diamond));
 				FHNetworkManager.SendMessageToServer (new M_C_LeaveWaitingRoom (playerInfoMe.uid));
 				FHNetworkManager.SendMessageToServer (new M_C_LeaveCurrentRoom (playerInfoMe.uid));
