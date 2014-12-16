@@ -69,7 +69,7 @@ public class FHSettingPanel : MonoBehaviour
 
 				case "HelpBtn":
 						
-						GuiManager.ShowPanel (GuiManager.instance.guiShop);
+						GuiManager.ShowPanel (GuiManager.instance.guiHelp);
 						Hide ();
 						break;
 
