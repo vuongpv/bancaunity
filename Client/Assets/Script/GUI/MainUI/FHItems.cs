@@ -42,7 +42,7 @@ public class FHItems : MonoBehaviour
 						break;
 				}
 
-				Debug.LogError ("==============  indexITem: " + indexITem);
+//				Debug.LogError ("==============  indexITem: " + indexITem);
 //				Bounds b = new Bounds (new Vector3 (-1, -1, 0), new Vector3 (sprite.width, sprite.height, 0));
 //
 //				if (b.Contains (position)) {
@@ -54,7 +54,7 @@ public class FHItems : MonoBehaviour
 
 		public void OnFingerMove (Vector3 position)
 		{
-				Debug.LogError ("OnFingerMove:  " + position.x + "," + position.y + ", " + position.z);
+//				Debug.LogError ("OnFingerMove:  " + position.x + "," + position.y + ", " + position.z);
 				position = convertPositionToCamera (new Vector2 (position.x, position.z), camera);
 //				position = new Vector2 (position.x, position.z);
 
@@ -74,7 +74,7 @@ public class FHItems : MonoBehaviour
 		}
 		public void OnFingerUp ()
 		{
-				Debug.LogError ("===================== reset item");
+//				Debug.LogError ("===================== reset item");
 //				indexITem = -1;
 		}
 	#endregion
