@@ -68,6 +68,7 @@ public class GuiManager : SingletonMono<GuiManager>
 
 		public static void ShowPanel (GUIDialogBase panelController)
 		{
+//				blackBorder.SetActiveRecursively (true);
 				ShowPanel (panelController, null);
 		}
 
@@ -94,6 +95,7 @@ public class GuiManager : SingletonMono<GuiManager>
 
 		public static void HidePanel (GUIDialogBase panelController, object parameter)
 		{
+//				blackBorder.SetActiveRecursively (false);
 				panelController.Hide (parameter);
 		}
 
