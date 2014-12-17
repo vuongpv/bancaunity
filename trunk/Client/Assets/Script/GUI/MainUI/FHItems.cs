@@ -14,33 +14,45 @@ public class FHItems : MonoBehaviour
 		{
 				boxBoom = boomIcon.GetComponent<BoxCollider> ();
 				boxIce = iceIcon.GetComponent<BoxCollider> ();
+
 				sprite = boomIcon.GetComponent<UISprite> ();
 		}
-	
 
 		void Update ()
 		{
-	
+			
 		}
+
 		public static Vector3 convertPositionToCamera (Vector3 v, Camera c)
 		{
 				return c.ScreenToWorldPoint (v);
 		}
-
 		
-	#region [ Input events ]
-		public void OnFingerDown (Vector3 position)
+		public bool OnFingerDown (Vector3 position)
 		{
-				switch (UICamera.selectedObject.name) {
-				case "Boom":
-						indexITem = 0;
-						boomObject.SetActive (true);
-						break;
-				case "Ice":
-						indexITem = 1;
-						iceObject.SetActive (true);
-						break;
-				}
+//				Vector2 p = new Vector2 (position.x, position.z);
+				Debug.Log ("====  position: " + position.ToString () + ",m  " + boxBoom.bounds.ToString ());		
+				position = convertPositionToCamera (position, camera);
+//				Debug.Log ("==== boxBoom: " + boxBoom.s.center.x + "," + boxBoom.bounds.center.y + "," + boxBoom.bounds.size.x + "," + boxBoom.bounds.size.y + ", boxIce: " + boxIce.bounds.ToString () + ",position: " + position.x + ", " + position.y + ", " + position.z);
+				Debug.Log ("==== boxBoom: " + boxBoom.size.ToString () + boomObject.transform.position.ToString () + ", position: " + position.ToString ());		
+				if (boxBoom.bounds.Contains (position)) {
+						return true;
+				} else if (boxIce.bounds.Contains (position))
+						return true;
+				Debug.Log ("****************************** false false false");
+				return false;
+
+//				switch (UICamera.selectedObject.name) {
+//				case "Boom":
+//						indexITem = 0;
+//						boomObject.SetActive (true);
+//						return true;
+//				case "Ice":
+//						indexITem = 1;
+//						iceObject.SetActive (true);
+//						return true;
+//				}
+//				return false;
 
 //				Debug.LogError ("==============  indexITem: " + indexITem);
 //				Bounds b = new Bounds (new Vector3 (-1, -1, 0), new Vector3 (sprite.width, sprite.height, 0));
@@ -52,31 +64,32 @@ public class FHItems : MonoBehaviour
 //				}
 		}
 
-		public void OnFingerMove (Vector3 position)
+		public bool OnFingerMove (Vector3 position)
 		{
 //				Debug.LogError ("OnFingerMove:  " + position.x + "," + position.y + ", " + position.z);
-				position = convertPositionToCamera (new Vector2 (position.x, position.z), camera);
+//				position = convertPositionToCamera (new Vector2 (position.x, position.z), camera);
 //				position = new Vector2 (position.x, position.z);
 
 //				Vector3 pos = Camera.main.ScreenToWorldPoint (position);
 				switch (indexITem) {
 				case 0:
-//						boomObject.transform.position = new Vector3 (boomObject.transform.position.x + position.x, boomObject.transform.position.y + position.y, boomObject.transform.position.z + position.z);
-//						boomObject.transform.position = Vector3.Lerp (boomObject.transform.position, position, 0.001f);
-//						boomObject.transform.forward = (position - boomObject.transform.position).normalized;
 						boomObject.transform.position = position;
-						break;
+						return true;
 				case 1:
-						
-						break;
+						iceObject.transform.position = position;
+						return true;
 				}
+				return false;
 
 		}
-		public void OnFingerUp ()
+
+		public bool OnFingerUp ()
 		{
-//				Debug.LogError ("===================== reset item");
-//				indexITem = -1;
+				if (indexITem >= 0) {
+						indexITem = -1;
+						return true;
+				}
+				return false;
 		}
-	#endregion
 
 }

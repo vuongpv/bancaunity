@@ -6,6 +6,8 @@ public class UIShop : MonoBehaviour
 
 		public UILabel numberGold1, numberGold2, numberGold3;
 		
+		
+		
 		public void Onclick ()
 		{
 				switch (UICamera.selectedObject.name) {

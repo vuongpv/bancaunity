@@ -123,6 +123,11 @@ public class FHPlayerController : MonoBehaviour
 
 		public virtual void OnFingerDown (Vector3 hitPoint)
 		{
+//				if (items.OnFingerDown (hitPoint)) {
+//						isDragging = true;
+//						return;
+//				}
+
 				if (targetGunID != -1)
 						return;
 				isDragging = true;
@@ -139,18 +144,22 @@ public class FHPlayerController : MonoBehaviour
 		public virtual void OnFingerUp ()
 		{
 				isDragging = false;
+
+//				if (items.OnFingerUp ())
+//						return;
+
 				if (currentGun.configGun.id > 100) {
 						if (targetGunID == -1)
 								currentGun.FireBullet ();
 				} else
 						currentGun.ReleaseTrigger ();
-				items.OnFingerUp ();
 		}
 
 
 		public virtual void OnFingerMove (Vector3 hitPoint)
 		{
-				items.OnFingerMove (hitPoint);
+//				if (items.OnFingerMove (hitPoint))
+//						return;
 
 				if (targetGunID != -1)
 						return;
